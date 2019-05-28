@@ -13,7 +13,7 @@
 #  updated_at      :datetime
 #
 
-class Users < ApplicationRecord
+class User < ApplicationRecord
     validates :fname, :lname, :email, :username, :session_token, presence: true
     validates :password, length: {minimum: 7}, allow_nil: true
 end

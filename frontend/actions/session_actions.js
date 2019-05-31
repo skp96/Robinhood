@@ -29,7 +29,7 @@ export const login = (user) => {
         return SessionApiUtil.login(user).then(currentUser => {
             return dispatch(receiveCurrentUser(currentUser))
         }, err => {
-            return dispatch(receiveSessionErrors(err))
+            return dispatch(receiveSessionErrors(err.responseJSON))
         })
     };
 }
@@ -47,7 +47,7 @@ export const signup = (user) => {
         return SessionApiUtil.signup(user).then(currentUser => {
             return dispatch(receiveCurrentUser(currentUser))
         }, err => {
-            return dispatch(receiveSessionErrors(err))
+            return dispatch(receiveSessionErrors(err.responseJSON))
         });
     };
 }

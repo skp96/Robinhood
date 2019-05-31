@@ -46,25 +46,16 @@ class SignupForm extends React.Component {
                             <h2 className="signup-subhead">Robinhood lets your invest in companies you love, commission <br/> -free.</h2>
                         </div>
                         <div className="input-fields">
-                            <label>
-                            <input className="first_name"  type="text" onChange={this.update('fname')} value={this.state.fname} placeholder="First name"/>
-                            </label>
-                            
-                            <label>
-                            <input className="last_name" type="text" onChange={this.update('lname')} value={this.state.lname} placeholder="Last name"/>
-                            </label>
+                        <div className="signup-name">
+                                <input type="text" onChange={this.update('fname')} value={this.state.fname} placeholder="First name"/>
+                                <input type="text" onChange={this.update('lname')} value={this.state.lname} placeholder="Last name"/>
+                            </div>
                             <br/>
-                            <label>
-                            <input className="email" type="text" onChange={this.update('email')} value={this.state.email} placeholder="Email address"/>
-                            </label>
+                            <input className="signup" type="text" onChange={this.update('email')} value={this.state.email} placeholder="Email address"/>
                             <br/>
-                            <label>
-                            <input className="username" type="text" onChange={this.update('username')} value={this.state.username} placeholder="Username" />
-                            </label>
+                            <input className="signup" type="text" onChange={this.update('username')} value={this.state.username} placeholder="Username" />
                             <br/>
-                            <label>
-                            <input className="password" type="password" onChange={this.update('password')} value={this.state.password} placeholder="Password (min. 10 characters)" />
-                            </label>
+                            <input className="signup" type="password" onChange={this.update('password')} value={this.state.password} placeholder="Password (min. 10 characters)" />
 
                             <div className="errors">{this.renderErrors()}</div>
 

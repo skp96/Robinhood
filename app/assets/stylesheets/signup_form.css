@@ -6,7 +6,7 @@
 .signup-form-box {
     margin: 163px;
     padding: 0 100px;
-    width: 800px;
+    width: 750px;
 }
 
 .signup-header {
@@ -28,15 +28,16 @@
     padding-bottom: 20px;
 }
 
+.signup-name {
+    display: flex;
+    justify-content: space-between 
+}
 
-.first_name {
+.signup-name input {
    background: white;
     font-size: 22px;
     height: 46;
-    padding-left: 18px;
-    padding-top: 10px;
-    padding-right: 5px;
-    padding-bottom: 10px;
+    padding: 10px 5px 10px 18px;
     border-radius: 4px;
     margin-bottom: 35px;
     width: 42%;
@@ -56,7 +57,7 @@
     width: 45%;
 }
 
-.email {
+.signup {
     background: white;
     font-size: 22px;
     height: 46;
@@ -68,39 +69,23 @@
     margin-bottom: 35px;
     border-color: lightgray;
     border-radius: 4px;
-    width: 93%;
+    width: 100%;
 }
 
-.username {
-    background: white;
-    font-size: 22px;
-    height: 46;
-    padding-left: 18px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 5px;
-    margin-right: 20px;
-    margin-bottom: 35px;
+.input-fields input {
+    border-style: solid;
     border-color: lightgray;
-    border-radius: 4px;
-    width: 93%;
 }
 
-.password {
-    background: white;
-    font-size: 22px;
-    height: 46;
-    padding-left: 18px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 5px;
-    margin-right: 20px;
-    margin-bottom: 35px;
-    border-color: lightgray;
-    border-radius: 4px;
-    width: 93%;
+.input-fields input::placeholder {
+    color: lightgray;
+    opacity: 1;
 }
-
+.input-fields input:focus {
+    outline: none;
+    border-style: solid;
+    border-color: #1ae9aa;
+}
 .signup-button {
     background-color: #21ce99;
     color: white;

@@ -16,7 +16,7 @@
     float: left;
 }
 
-h1 {
+.intro {
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
     font-weight: bold;
@@ -84,10 +84,11 @@ h1 {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.25px;
+    padding-top: 10px;
 }
 
 .errors div i {
-    padding: 7px;
+    padding-top: 7px;
 }
 
 .login-button {

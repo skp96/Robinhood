@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as SessionApiUtil from './util/session_api_util'
-import Root from './reducers/root_reducer'
+import Root from './component/root'
 import configureStore from './store/store'
 
 document.addEventListener("DOMContentLoaded", () => {

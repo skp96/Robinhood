@@ -5,8 +5,8 @@
 
 .signup-form-box {
     margin: 163px;
-    padding: 100px;
-    background-color: green;
+    padding: 0 100px;
+    width: 800px;
 }
 
 .signup-header {
@@ -17,7 +17,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 100px;
     font-size: 48px;
-    padding-bottom: 20px;
+    width: 100%;
     margin: 0 0 12px;
 }
 
@@ -28,3 +28,99 @@
     padding-bottom: 20px;
 }
 
+
+.first_name {
+   background: white;
+    font-size: 22px;
+    height: 46;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+    margin-bottom: 35px;
+    width: 42%;
+}
+
+.last_name {
+    background: white;
+    font-size: 22px;
+    height: 46;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    border-color: lightgray;
+    border-radius: 4px;
+    width: 45%;
+}
+
+.email {
+    background: white;
+    font-size: 22px;
+    height: 46;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    border-color: lightgray;
+    border-radius: 4px;
+    width: 93%;
+}
+
+.username {
+    background: white;
+    font-size: 22px;
+    height: 46;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    border-color: lightgray;
+    border-radius: 4px;
+    width: 93%;
+}
+
+.password {
+    background: white;
+    font-size: 22px;
+    height: 46;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    border-color: lightgray;
+    border-radius: 4px;
+    width: 93%;
+}
+
+.signup-button {
+    background-color: #21ce99;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 15px 40px 15px 40px;
+    width: 97%;
+}
+
+.signup-button:hover{
+  cursor: pointer;
+  background-color: #1ae9aa;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 15px 40px 15px 40px;
+  width: 97%;
+}
+
+.signup-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px;
+}

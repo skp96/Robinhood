@@ -1,0 +1,52 @@
+.home-signup {
+    display: flex;
+    justify-content: space-between
+}
+.class {
+    flex-direction: column;
+}
+
+.left {
+    padding-top: 265px;
+    padding-left: 301px;
+}
+
+.left h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 46px;
+    font-weight: bold; 
+    padding-bottom: 50px;
+}
+
+.text p {
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 41px;
+    line-height: 1.6;
+}
+
+.home-signup-button button {
+    background-color: #21ce99;
+    color: white;
+    font-size: 15px;
+    border-radius: 36px;
+    padding: 15px 30px 15px 30px;
+    border: none;
+    transition: box-shadow .3s
+}
+
+.home-signup-button button:hover {
+    box-shadow: 0 0 20px rgba(33, 33,33, .2);
+    text-decoration: underline;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.iphone-image img {
+    padding-right: 240px;
+}
+

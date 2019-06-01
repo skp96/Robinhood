@@ -4,7 +4,7 @@
 }
 
 .signup-form-box {
-    margin: 163px;
+    margin: 31px;
     padding: 0 100px;
     width: 750px;
 }
@@ -58,6 +58,7 @@
 }
 
 .signup {
+    box-sizing: border-box;
     background: white;
     font-size: 22px;
     height: 46;
@@ -87,25 +88,49 @@
     border-color: #1ae9aa;
 }
 .signup-button {
+    box-sizing: border-box;
     background-color: #21ce99;
     color: white;
     font-size: 15px;
     border-radius: 5px;
     padding: 15px 40px 15px 40px;
-    width: 97%;
+    width: 100%;
 }
 
+.existing-member {
+    padding-bottom: 20px;
+}
+
+.signin-link {
+    text-decoration-line: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: #21ce99;
+    font-weight: 500px;
+}
+
+
 .signup-button:hover{
-  cursor: pointer;
-  background-color: #1ae9aa;
-  color: white;
-  font-size: 15px;
-  border-radius: 5px;
-  padding: 15px 40px 15px 40px;
-  width: 97%;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #1ae9aa;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 15px 40px 15px 40px;
+    width: 100%;
 }
 
 .signup-button:focus {
     outline: none;
     box-shadow: 0 0 0 2px;
+}
+
+.signup_gif img{
+    margin-top: 302px;
+    margin-right: 100px;
+}
+
+.signup-logo img {
+    height: 200px;
 }

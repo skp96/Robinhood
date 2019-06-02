@@ -19,7 +19,7 @@ const HomeNoUser = () => {
                         </div>
                         <div className="home-signup-button">
                             <button>
-                                <Link className="link" to="/signup">Sign Up</Link>
+                                <Link to="/signup" className="link">Sign Up</Link>
                             </button>
                         </div>
                     </div>

@@ -12,16 +12,19 @@ class LoginForm extends React.Component {
     }
 
     update(field) {
+        debugger
         return (e) => this.setState({ [field]: e.target.value });
     }
 
     handleSubmit(e) {
+
         e.preventDefault()
         let user = Object.assign({}, this.state)
         this.props.login(user)
     };
 
     renderErrors() {
+        
         return (
             <ul>
                 {this.props.errors.map((error, i) => {
@@ -32,6 +35,7 @@ class LoginForm extends React.Component {
     }
 
     componentDidMount() {
+
         this.props.clearErrors
     }
 

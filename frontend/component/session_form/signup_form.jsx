@@ -29,6 +29,7 @@ class SignupForm extends React.Component {
             <ul>
                 {this.props.errors.map((error, i) => {
                     return <div key={i}><i className="fas fa-exclamation-circle"></i>{error}</div>
+                    // need to change fname and lname to "First name and Last name"
                 })}
             </ul>
         );

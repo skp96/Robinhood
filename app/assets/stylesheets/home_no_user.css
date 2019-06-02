@@ -8,7 +8,7 @@
 
 .left {
     padding-top: 265px;
-    padding-left: 301px;
+    padding-left: 20px;
 }
 
 .left h1 {
@@ -47,6 +47,7 @@
 }
 
 .iphone-image img {
-    padding-right: 240px;
+    padding-top: 75px;
+    height: 653px;
 }
 

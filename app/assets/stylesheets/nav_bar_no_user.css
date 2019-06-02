@@ -2,39 +2,59 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
+    padding-right: 100px;
 }
 
-.nav-home{
+.profile{
     display: flex;
     align-items: center;
     text-decoration: none;
     color: black
 }
 
+
 .nav-home p {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
 }
+
+.profile a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.github {
+    padding-left: 30px;
+    padding-right : 30px;
+}
+
+.profile a:hover {
+    text-decoration: underline;
+    color:  #21ce99;
+}
+
 
 .nav-home p:hover {
     text-decoration: underline;
     color:  #21ce99;   
 }
 
-.nav-home img{
+.profile img{
     display: inline-block;
     height: 55px;
-    padding-left: 261px;
 }
 
-.nav-links{
-    padding-right: 350px;
-}
 
 .nav-links button {
     background-color: #21ce99;

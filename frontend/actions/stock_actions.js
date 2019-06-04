@@ -1,18 +1,65 @@
 import * as StockApiUtil from '../util/stock_api_util';
 
-const RECEIVE_ALL_STOCKS = 'RECEIVE_ALL_STOCKS';
-const RECEIVE_STOCK = 'RECEIVE_STOCK';
-const RECEIVE_USER_STOCKS = 'RECEIVE_USER_STOCKS';
-const RECEIVE_COMPANY_DATA = 'RECEIVE_COMPANY_DATA';
-const RECEIVE_QUOTE = 'RECEIVE_QUOTE';
-const RECEIVE_CHART_DATA = 'RECEIVE_CHART_DATA';
-const RECEIVE_NEWS = 'RECEIVE_NEWS';
+export const RECEIVE_USER_STOCKS = 'RECEIVE_USER_STOCKS';
+export const RECEIVE_STOCK = 'RECEIVE_STOCK';
+export const RECEIVE_STOCK_DATA = 'RECEIVE_STOCK_DATA';
+export const RECEIVE_ALL_STOCKS = 'RECEIVE_ALL_STOCKS';
+export const RECEIVE_CHART_DATA = 'RECEIVE_CHART_DATA';
+export const RECEIVE_CHART_DATA_1D = 'RECEIVE_CHART_DATA_1D'
+export const RECEIVE_NEWS = 'RECEIVE_NEWS';
 
 // export const getAllStocks = () => {
 // }
 // not sure if the request is being made correctly -- haven't 
 // created user to port to stock assocation yet
 
+// stockapiutil not working, need to fix
+const receiveStock = (stock) => {
+    return {
+        type: RECEIVE_STOCK,
+        stock: stock,
+    };
+}
+
+const receiveStockData = (symbol, data) => {
+    return {
+        type: RECEIVE_STOCK_DATA,
+        symbol: symbol,
+        data: data
+    };
+}
+
+const receiveAllStocks = (stocks) => {
+    return {
+        type: RECEIVE_ALL_STOCKS,
+        stocks: stocks,
+    };
+}
+
+const receiveChartData = (symbol, chartData) => {
+    return {
+        type: RECEIVE_CHART_DATA,
+        symbol: symbol,
+        chartData: chartData,
+    }
+}
+
+const receiveChartData1d = (symbol, chartData) => {
+    return {
+        type: RECEIVE_CHART_DATA_1D,
+        symbol: symbol,
+        chartData: chartData,
+    }
+}
+
+const receiveNews = (news) => {
+    return {
+        type: RECEIVE_NEWS,
+        news: news
+    }
+}
+
+// stockapiutil not working, need to fix
 export const getStock = (symbol) => {
     return (dispatch) => {
         return StockApiUtil.getStock(symbol).then(stock => {
@@ -23,16 +70,16 @@ export const getStock = (symbol) => {
 
 export const fetchCompanyData = (symbol) => {
     return (dispatch) => {
-        return StockApiUtil.fetchCompanyData(symbol).then( data => {
-            return dispatch(receiveCompanyData(data))
+        return StockApiUtil.fetchCompanyData(symbol).then(data => {
+            return dispatch(receiveStockData(symbol, data))
         });
     };
 }
 
 export const fetchStockQuote = (symbol) => {
     return (dispatch) => {
-        return StockApiUtil.fetchStockQuote(symbol).then( quote => {
-            return dispatch(receiveQuote(quote))
+        return StockApiUtil.fetchStockQuote(symbol).then(quote => {
+            return dispatch(receiveStockData(symbol, quote))
         });
     };
 }
@@ -47,8 +94,24 @@ export const fetchStocks = () => {
 
 export const fetchStockChartData = (symbol, range) => {
     return (dispatch) => {
-        return StockApiUtil.fetchStockChartData(symbol, range).then (chartData => {
-            return dispatch(receiveChartData(chartData));
+        return StockApiUtil.fetchStockChartData(symbol, range).then(chartData => {
+            return dispatch(receiveChartData(symbol, chartData));
         })
+    }
+}
+
+export const fetchStockChartData1d = (symbol) => {
+    return (dispatch) => {
+        return StockApiUtil.fetchStockChartData1d(symbol).then(chartData => {
+            return dispatch(receiveChartData1d(symbol, chartData))
+        }) 
+    }
+}
+
+export const fetchStockNews = (name) => {
+    return (dispatch) => {
+        return StockApiUtil.fetchStockNews(name).then(news => {
+            return dispatch(receiveNews(news))
+        } )
     }
 }

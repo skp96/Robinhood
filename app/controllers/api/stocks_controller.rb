@@ -1,7 +1,7 @@
-class StocksController < ApplicationController
+class Api::StocksController < ApplicationController
 
     def index 
-        @stock = Stock.all
+        @stocks = Stock.all
         render 'api/stocks/index'
     end
 

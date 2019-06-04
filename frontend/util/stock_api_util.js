@@ -6,6 +6,7 @@ export const getAllStocks = () => {
     });
 }
 
+// request not working, need to fix
 export const getStock = (symbol) => {
     return $.ajax ({
         method: 'GET',
@@ -37,7 +38,14 @@ export const fetchStocks = () => {
 export const fetchStockChartData = (symbol, range) => {
     return $.ajax ({
         method: 'GET',
-        url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=chart&range=${range}`
+        url: `https://api.iextrading.com/1.0/stock/${symbol}/chart/${range}`
+    })
+}
+
+export const fetchStockChartData1d = (symbol) => {
+    return $.ajax ({
+        method: 'GET',
+        url: `https://api.iextrading.com/1.0/stock/${symbol}/chart/1d`
     })
 }
 

@@ -68,18 +68,10 @@ export const getStock = (symbol) => {
     };
 }
 
-export const fetchCompanyData = (symbol) => {
+export const fetchCompanyAndQuoteData = (symbol) => {
     return (dispatch) => {
-        return StockApiUtil.fetchCompanyData(symbol).then(data => {
+        return StockApiUtil.fetchCompanyAndQuoteData(symbol).then(data => {
             return dispatch(receiveStockData(symbol, data))
-        });
-    };
-}
-
-export const fetchStockQuote = (symbol) => {
-    return (dispatch) => {
-        return StockApiUtil.fetchStockQuote(symbol).then(quote => {
-            return dispatch(receiveStockData(symbol, quote))
         });
     };
 }

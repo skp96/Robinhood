@@ -4,7 +4,7 @@ import * as StockApiUtil from './util/stock_api_util'
 import Root from './component/root'
 import configureStore from './store/store'
 
-import { fetchStockChartData } from './actions/stock_actions'
+import { fetchStockChartData, fetchStockChartData1d, fetchCompanyAndQuoteData, fetchStocks } from './actions/stock_actions'
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         store = configureStore();
     }
+
     // // plain old ajax requests
     // window.getAllStocks = StockApiUtil.getAllStocks;
     // window.getStock = StockApiUtil.getStock("FB");
@@ -33,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // thunk actions
 
     window.fetchStockChartData = fetchStockChartData("FB", "1m")
+    window.fetchStockChartData1d = fetchStockChartData1d("FB")
+    window.fetchCompanyAndQuoteData = fetchCompanyAndQuoteData("FB")
+    window.fetchStocks = fetchStocks()
 
 
     window.getState = store.getState

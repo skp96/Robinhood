@@ -22,21 +22,23 @@ const stocksReducer = (oldState = {}, action) => {
             return newState;
 
         case RECEIVE_STOCK_DATA:
-            newState[action.symbol].about = action.data.description
-            newState[action.symbol].ceo = action.data.ceo
-            newState[action.symbol].industry = action.data.industry
-            newState[action.symbol].sector = action.data.sector
-            newState[action.symbol].exchange = action.data.exchange
-            newState[action.symbol].marketCap = action.data.marketCap
-            newState[action.symbol].peRatio = action.data.peRatio
-            newState[action.symbol].close = action.data.close
-            newState[action.symbol].avgVolume = action.data.avgTotalVolume
-            newState[action.symbol].high = action.data.high
-            newState[action.symbol].low = action.data.low
-            newState[action.symbol].open = action.data.open
-            newState[action.symbol].volume = action.data.latestVolume
-            newState[action.symbol].week52high = action.data.week52high
-            newState[action.symbol].week52low = action.data.week52low
+            newState[action.symbol] = {}
+
+            newState[action.symbol].about = action.data[action.symbol].company.description
+            newState[action.symbol].ceo = action.data[action.symbol].company.CEO
+            newState[action.symbol].industry = action.data[action.symbol].company.industry
+            newState[action.symbol].sector = action.data[action.symbol].company.sector
+            newState[action.symbol].exchange = action.data[action.symbol].company.exchange
+            newState[action.symbol].marketCap = action.data[action.symbol].quote.marketCap
+            newState[action.symbol].peRatio = action.data[action.symbol].quote.peRatio
+            newState[action.symbol].close = action.data[action.symbol].quote.close
+            newState[action.symbol].avgVolume = action.data[action.symbol].quote.avgTotalVolume
+            newState[action.symbol].high = action.data[action.symbol].quote.high
+            newState[action.symbol].low = action.data[action.symbol].quote.low
+            newState[action.symbol].open = action.data[action.symbol].quote.open
+            newState[action.symbol].volume = action.data[action.symbol].quote.latestVolume
+            newState[action.symbol].week52High = action.data[action.symbol].quote.week52High
+            newState[action.symbol].week52Low = action.data[action.symbol].quote.week52Low
 
             return newState;
 

@@ -14,17 +14,10 @@ export const getStock = (symbol) => {
     })
 }
 
-export const fetchCompanyData = (symbol) => {
+export const fetchCompanyAndQuoteData = (symbol) => {
     return $.ajax ({
         method: 'GET',
-        url: `https://api.iextrading.com/1.0/stock/${symbol}/company`
-    })
-}
-
-export const fetchStockQuote = (symbol) => {
-    return $.ajax ({
-        method: 'GET',
-        url: `https://api.iextrading.com/1.0/stock/${symbol}/quote`
+        url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=quote,company`
     })
 }
 

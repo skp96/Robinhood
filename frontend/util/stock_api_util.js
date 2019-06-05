@@ -42,9 +42,9 @@ export const fetchStockChartData1d = (symbol) => {
     })
 }
 
-export const fetchStockNews = (name) => {
+export const fetchStockNews = (symbol) => {
     return $.ajax ({
         method: 'GET',
-        url: `https://newsapi.org/v2/everything?q=${name}&sortBy=popularity&apiKey=5702d83683344135acefee6c911504bb&language=en&domains=wsj.com,cnbc.com,finance.yahoo.com,seekingalpha.com`
+        url: `https://cloud.iexapis.com/stable/stock/${symbol}/news/last/3?token=sk_6bd49bdff71d4034a9ce14a28ad6fb89`
     })
 }

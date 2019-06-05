@@ -7,7 +7,6 @@ class HomeIndex extends React.Component {
         const currentUser = this.props.currentUser
 
         if(currentUser) {
-            debugger
             return (
                 <HomeUser logout={this.props.logout}/>
             )

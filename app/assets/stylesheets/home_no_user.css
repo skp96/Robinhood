@@ -8,14 +8,14 @@
 
 .left {
     padding-top: 265px;
-    padding-left: 20px;
+    padding-left: 100px;
 }
 
 .left h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 46px;
+    font-size: 30px;
     font-weight: bold; 
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 }
 
 .text p {
@@ -49,6 +49,7 @@
 .iphone-image img {
     padding-top: 75px;
     height: 653px;
+    margin-left: 50px;
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
         -ms-animation: fadein 2s; /* Internet Explorer */

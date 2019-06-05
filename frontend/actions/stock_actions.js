@@ -52,9 +52,10 @@ const receiveChartData1d = (symbol, chartData) => {
     }
 }
 
-const receiveNews = (news) => {
+const receiveNews = (symbol, news) => {
     return {
         type: RECEIVE_NEWS,
+        symbol: symbol,
         news: news
     }
 }
@@ -100,10 +101,10 @@ export const fetchStockChartData1d = (symbol) => {
     }
 }
 
-export const fetchStockNews = (name) => {
+export const fetchStockNews = (symbol) => {
     return (dispatch) => {
-        return StockApiUtil.fetchStockNews(name).then(news => {
-            return dispatch(receiveNews(news))
+        return StockApiUtil.fetchStockNews(symbol).then(news => {
+            return dispatch(receiveNews(symbol, news))
         } )
     }
 }

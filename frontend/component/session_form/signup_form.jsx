@@ -61,12 +61,13 @@ class SignupForm extends React.Component {
                         <input className="signup" type="text" onChange={this.update('username')} value={this.state.username} placeholder="Username" />
                         <br/>
                         <input className="signup" type="password" onChange={this.update('password')} value={this.state.password} placeholder="Password (min. 7 characters)" />
-                        <div className="existing-member">
-                            <Link className="signin-link" to="/login">Already a member, sign in here!</Link>
-                        </div>
                         <div className="errors">{this.renderErrors()}</div>
 
                         <button className="signup-button" type="submit" value={this.props.formType}>Sign Up</button>
+                        
+                        <div className="existing-member">
+                            <Link className="signin-link" to="/login">Already a member, sign in here!</Link>
+                        </div>
                     </div>
                 </form>
                 <div className="signup_gif">

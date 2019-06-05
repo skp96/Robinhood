@@ -22,23 +22,31 @@ const stocksReducer = (oldState = {}, action) => {
             return newState;
 
         case RECEIVE_STOCK_DATA:
-            newState[action.symbol] = {}
+            
+            if (!newState[action.symbol]) {
+                newState[action.symbol] = {}
+            }
 
-            newState[action.symbol].about = action.data[action.symbol].company.description
-            newState[action.symbol].ceo = action.data[action.symbol].company.CEO
-            newState[action.symbol].industry = action.data[action.symbol].company.industry
-            newState[action.symbol].sector = action.data[action.symbol].company.sector
-            newState[action.symbol].exchange = action.data[action.symbol].company.exchange
-            newState[action.symbol].marketCap = action.data[action.symbol].quote.marketCap
-            newState[action.symbol].peRatio = action.data[action.symbol].quote.peRatio
-            newState[action.symbol].close = action.data[action.symbol].quote.close
-            newState[action.symbol].avgVolume = action.data[action.symbol].quote.avgTotalVolume
-            newState[action.symbol].high = action.data[action.symbol].quote.high
-            newState[action.symbol].low = action.data[action.symbol].quote.low
-            newState[action.symbol].open = action.data[action.symbol].quote.open
-            newState[action.symbol].volume = action.data[action.symbol].quote.latestVolume
-            newState[action.symbol].week52High = action.data[action.symbol].quote.week52High
-            newState[action.symbol].week52Low = action.data[action.symbol].quote.week52Low
+            const {company, quote} = action.data[action.symbol]
+
+            newState[action.symbol].name = company.companyName
+            newState[action.symbol].about = company.description
+            newState[action.symbol].ceo = company.CEO
+            newState[action.symbol].industry = company.industry
+            newState[action.symbol].sector = company.sector
+            newState[action.symbol].exchange = company.exchange
+            newState[action.symbol].marketCap = quote.marketCap
+            newState[action.symbol].peRatio = quote.peRatio
+            newState[action.symbol].close = quote.close
+            newState[action.symbol].avgVolume = quote.avgTotalVolume
+            newState[action.symbol].high = quote.high
+            newState[action.symbol].low = quote.low
+            newState[action.symbol].open = quote.open
+            newState[action.symbol].volume = quote.latestVolume
+            newState[action.symbol].week52High = quote.week52High
+            newState[action.symbol].week52Low = quote.week52Low
+            newState[action.symbol].changePercent = quote.changePercent
+            newState[action.symbol].previousClose = quote.previousClose
 
             return newState;
 
@@ -46,10 +54,14 @@ const stocksReducer = (oldState = {}, action) => {
             let filteredData = action.chartData.map( obj => {
                 return ({date: obj.label, price: obj.close})
             });
-            
-            newState[action.symbol] = {}
+
+            if (!newState[action.symbol]){
+                newState[action.symbol] = {}
+            }
+
             newState[action.symbol].chartData = filteredData;
 
+            
             return newState;
 
         case RECEIVE_CHART_DATA_1D:
@@ -57,12 +69,21 @@ const stocksReducer = (oldState = {}, action) => {
             let filteredData2 = filteredData1.map (obj => {
                 return ({time: obj.label, price: obj.close})
             })
-            newState[action.symbol] = {}
+
+            if (!newState[action.symbol]) {
+                newState[action.symbol] = {}
+            }
             newState[action.symbol].chartData1d = filteredData2;
 
+            
             return newState;
 
          case RECEIVE_NEWS:
+
+            if (!newState[action.symbol]) {
+                newState[action.symbol] = {}
+            }
+            
              newState[action.symbol].news = action.news
              return newState;
 

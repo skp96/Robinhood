@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBarUser = (props) => {
-    debugger
     return (
         <nav className="login-signup">
             <Link className="nav-home" to="/dashboard">

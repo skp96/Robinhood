@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // thunk actions
 
     window.fetchStockChartData = fetchStockChartData("FB", "1m")
-    window.fetchStockChartData1d = fetchStockChartData1d("FB")
-    window.fetchCompanyAndQuoteData = fetchCompanyAndQuoteData("FB")
-    window.fetchStocks = fetchStocks()
+    // window.fetchStockChartData1d = fetchStockChartData1d("FB")
+    // window.fetchCompanyAndQuoteData = fetchCompanyAndQuoteData("FB")
+    // window.fetchStocks = fetchStocks()
 
 
     window.getState = store.getState

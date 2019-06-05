@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 20px;
     position: fixed;
+    margin-left: 63px;
     top: 0;
     width: 100%;
     background-color: white;
@@ -11,7 +12,7 @@
 .nav-links {
     display: flex;
     align-items: center;
-    padding-right: 100px;
+    padding-right: 175px;
 }
 
 .profile{

@@ -1,5 +1,25 @@
 import {connect} from 'react-redux'
-// import stock.jsx
-import {
+import Stock from './stock'
 
-} from '../../util/stock_api_util'
+
+import {
+    fetchCompanyAndQuoteData,
+    fetchStockNews
+} from '../../actions/stock_actions'
+
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        currentUser: state.entities.users[state.session.id],
+        stock: state.entities.stocks[ownProps.match.params.symbol],
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCompanyAndQuoteData: (symbol) => dispatch(fetchCompanyAndQuoteData(symbol)),
+        fetchStockNews: (symbol) => dispatch(fetchStockNews(symbol))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stock)

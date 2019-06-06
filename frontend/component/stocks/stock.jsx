@@ -1,6 +1,7 @@
 import React from 'react'
 import StockChartContainer from '../charts/stock_charts_container'
 import StockNews from '../news/stock_news'
+import NavBarUser from '../nav/nav_bar_user'
 
 
 class Stock extends React.Component {
@@ -19,9 +20,15 @@ class Stock extends React.Component {
 
         for (var key in info) {
             if (typeof info[key] === 'number') {
-                if (key === "peRatio" || key === "avgVolume" || key === "volume") {
+                if (key === "peRatio") {
                     formattedInfo[key] = info[key]
-                } else if (info[key].toString().length >= 10) {
+                } else if (key === "volume" || key === "avgVolume") { 
+                    if (info[key].toString().length >= 7) {
+                        formattedInfo[key] = `${(info[key] / 100000).toFixed(2)}M`
+                    } else {
+                        formattedInfo[key] = `${info[key].toString().slice(0, 4)},${info[key].toString().slice(4)}`
+                    }
+                }else if (info[key].toString().length >= 10) {
                     formattedInfo[key] =  `$${(info[key] / 1000000000 ).toFixed(2)}B`
                 } else if (info[key].toString().length >= 7) {
                     formattedInfo[key] = `$${(info[key] / 100000).toFixed(2)}M`
@@ -64,82 +71,75 @@ class Stock extends React.Component {
 
         
         return (
-            <div className="stock-main">
-                <StockChartContainer />
-                <div className="stock-about">
-                    <h1>About</h1>
-                    <tabel>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <div className="header">
-                                <td><h3>CEO</h3></td>
-                                <td><h3>Employees</h3></td>
-                                <td><h3>Headquarters</h3></td>
-                                <td><h3>Founded</h3></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="about-info">
-                                <td><p>{stockInfo.ceo}</p></td>
-                                <td><p>-</p></td>
-                                <td><p>-</p></td>
-                                <td><p>-</p></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="header">
-                                <td><h3>Market Cap</h3></td>
-                                <td><h3>Price-Earnings Ratio</h3></td>
-                                <td><h3>Dividend Yield</h3></td>
-                                <td><h3>Average Volume</h3></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="about-info">
-                                <td><p>{formattedInfo.marketCap}</p></td>
-                                <td><p>{formattedInfo.peRatio}</p></td>
-                                <td><p>-</p></td>
-                                <td><p>{formattedInfo.avgVolume}</p></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="header">
-                                <td><h3>High Today</h3></td>
-                                <td><h3>Low Today</h3></td>
-                                <td><h3>Open Price</h3></td>
-                                <td><h3>Volume</h3></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="about-info">
-                                <td><p>{formattedInfo.high}</p></td>
-                                <td><p>{formattedInfo.low}</p></td>
-                                <td><p>{formattedInfo.open}</p></td>
-                                <td><p>{formattedInfo.volume}</p></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="header">
-                                <td><h3>52 Week High</h3></td>
-                                <td><h3>52 Week Low</h3></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div className="about-info">
-                                <td><p>{formattedInfo.week52Low}</p></td>
-                                <td><p>{formattedInfo.week52Low}</p></td>
-                            </div>
-                        </tr>
+            <div>
+                <NavBarUser logout={this.props.logout} />
+                <div className="stock-main">
+                    <StockChartContainer />
+                    <div className="stock-about">
+                        <div className="about-line">
+                            <h1>About</h1>
+                        </div>
+                        <h2>{stockInfo.about}</h2>
+                        <table id="about-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="header">
+                                    <td>CEO</td>
+                                    <td>Employees</td>
+                                    <td>Headquarters</td>
+                                    <td>Founded</td>
+                                </tr>
+                                <tr className="about-info">
+                                    <td>{stockInfo.ceo}</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr className="header">
+                                    <td>Market Cap</td>
+                                    <td>Price-Earnings Ratio</td>
+                                    <td>Dividend Yield</td>
+                                    <td>Average Volume</td>
+                                </tr>
+                                <tr className="about-info">
+                                    <td>{formattedInfo.marketCap}</td>
+                                    <td>{formattedInfo.peRatio}</td>
+                                    <td>-</td>
+                                    <td>{formattedInfo.avgVolume}</td>
+                                </tr>
+                                <tr className="header">
+                                    <td>High Today</td>
+                                    <td>Low Today</td>
+                                    <td>Open Price</td>
+                                    <td>Volume</td>
+                                </tr>
+                                <tr className="about-info">
+                                    <td>{formattedInfo.high}</td>
+                                    <td>{formattedInfo.low}</td>
+                                    <td>{formattedInfo.open}</td>
+                                    <td>{formattedInfo.volume}</td>
+                                </tr>
+                                <tr className="header">
+                                    <td>52 Week High</td>
+                                    <td>52 Week Low</td>
+                                </tr>
+                                <tr className="about-info">
+                                    <td>{formattedInfo.week52Low}</td>
+                                    <td>{formattedInfo.week52Low}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    </tabel>
+                    <StockNews stockNews={stockNews} />
                 </div>
-
-                <StockNews stockNews={stockNews} />
             </div>
         )
     }

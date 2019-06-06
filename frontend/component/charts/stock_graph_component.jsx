@@ -108,11 +108,11 @@ class StockGraph extends React.Component {
             </div>
             
             <div className="line-graph">
-                <LineChart width={750} height={195} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
+                <LineChart width={750} height={250} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
                     <XAxis dataKey="label" hide={true} />
                     <YAxis hide={true} domain={['dataMin', 'dataMax']}/>
                     <Tooltip />
-                        <Line type="linear" dataKey="price" dot={false} stroke={this.color()} />
+                        <Line type="linear" dataKey="price" dot={false} stroke={this.color()} strokeWidth={2}/>
                 </LineChart>
             </div>
         

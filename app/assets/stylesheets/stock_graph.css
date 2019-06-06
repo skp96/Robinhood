@@ -1,0 +1,28 @@
+.graph-fin-metrics {
+    margin-bottom: 10px;
+}
+
+.graph-fin-metrics h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+}
+
+.graph-fin-metrics h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    margin: 0;
+}
+
+.metric-changes {
+    display: flex
+}
+
+.metric-changes h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px;
+}

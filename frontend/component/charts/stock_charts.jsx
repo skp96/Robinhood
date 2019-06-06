@@ -12,6 +12,7 @@ class StockChart extends React.Component {
         this.renderChart = this.renderChart.bind(this)
     }
 
+
     handleOnClick1d(e, symbol) {
         e.preventDefault()
         this.props.fetchStockChartData1d(symbol)
@@ -42,9 +43,33 @@ class StockChart extends React.Component {
     }
 
     render () {
+        let stock = this.props.stock ? this.props.stock : {
+            name: "",
+            about: "",
+            ceo: "",
+            industry: "",
+            sector: "",
+            exchange: "",
+            marketCap: "",
+            peRatio: "",
+            close: "",
+            avgVolume: "",
+            high: "",
+            low: "",
+            open: "",
+            volume: "",
+            week52High: "",
+            week52Low: "",
+            changePercent: "",
+            previousClose: "",
+        }
         const symbol = this.props.match.params.symbol;
         return (
             <div className = "stock-chart">
+                <ul>
+                    <li><a>{stock.sector}</a></li>
+                    <li><a>{stock.industry}</a></li>
+                </ul>
                 <div className="graph">
                     {this.renderChart()}
                 </div>
@@ -58,6 +83,7 @@ class StockChart extends React.Component {
                         <li onClick={(e) => this.handleOnClick(e, symbol, "5y")}>5Y</li>
                     </ul>
                 </div>
+                <div className="style-line"></div>
                 
             </div>
         )

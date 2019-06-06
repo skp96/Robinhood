@@ -1,0 +1,52 @@
+.user-nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px 0px 0px;
+    position: fixed;
+    margin-left: 63px;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    height: 64px;
+}
+
+.user-nav-links {
+    display: flex;
+    align-items: center;
+    padding-right: 175px;
+}
+
+.user-nav-home {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black
+}
+
+.user-nav-home img{
+    display: inline-block;
+    height: 55px;
+}
+
+.user-nav-links button {
+    background-color: #21ce99;
+    color: white;
+    font-size: 15px;
+    border-radius: 36px;
+    padding: 10px 30px 10px 30px;
+    border: none;
+    margin-left: 30px;
+    transition: box-shadow .3s
+}
+
+.user-nav-links button:hover {
+    box-shadow: 0 0 20px rgba(33, 33,33, .2);
+    text-decoration: underline;
+}
+
+.user-nav-links button{
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}

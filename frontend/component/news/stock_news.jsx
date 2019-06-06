@@ -7,20 +7,21 @@ class StockNews extends React.Component {
             return (
                 <li>
                     <a href={news.url} className="stock-news-item">
-                        <img src={news.image} />
+                        <img src={news.image} width="200" height="200" />
                         <div className="news-content">
-                            <h4>{news.source}</h4>
-                            <h3>{news.headline}</h3>
-                            <p>{news.summary}</p>
+                            <h3>{news.source}</h3>
+                            <h4>{news.headline}</h4>
                         </div>
                     </a>
                 </li>
             )
         })
         return (
-            <div className="stock-news">
-                <h1>News</h1>
-                <ul>
+            <div>
+                <div className = "stock-news">
+                    <h1>News</h1>
+                </div>
+                <ul className="stock-news-container">
                     {newsData}
                 </ul>
             </div>

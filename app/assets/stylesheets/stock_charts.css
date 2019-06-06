@@ -1,0 +1,63 @@
+.stock-chart ul li {
+    display: inline-block;
+    padding: 0px 16px 19px 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #21ce99;
+}
+
+.stock-chart ul li a {
+    cursor: pointer;
+    border: none;
+    padding: 8px 7px 8px;
+    border-radius: 20px;
+    background: rgba(33,206,153,0.2);
+}
+
+.stock-chart ul li:hover {
+    display: inline-block;
+    padding: 0px 16px 19px 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.stock-chart ul li a:hover {
+    cursor: pointer;
+    border: none;
+    padding: 8px 7px 8px;
+    border-radius: 20px;
+    background-color:  rgba(33,236,153);
+}
+
+
+.datarange ul {
+    border: none;
+    border-top: 2px dotted;
+    color: lightgray;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 47px;
+}
+
+.datarange ul li {
+    color: black;
+    display: inline-block;
+    padding: 20px 30px 13px 0px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    
+}
+
+.datarange ul li:hover {
+    color: #21ce99;
+    display: inline-block;
+    padding: 20px 30px 13px 0px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+}
+

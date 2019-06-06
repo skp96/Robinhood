@@ -7,7 +7,6 @@ const HomeUser = (props) => {
             <div className="nav-bar">
                 <NavBarUser logout={props.logout}/>
             </div>
-            <p>Under contruction</p>
         </div>
     )
 }

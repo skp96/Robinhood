@@ -1,15 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import TextField from 'material-ui/TextField'
 
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             fname: "",
+            fnameError: "",
             lname: "",
-            email: "",
+            lnameError: "",
             username: "",
+            userNameError: "",
+            email: "",
+            emailErro: "",
             password: "",
+            passwordError: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -28,8 +34,17 @@ class SignupForm extends React.Component {
         return (
             <ul>
                 {this.props.errors.map((error, i) => {
-                    return <div key={i}><i className="fas fa-exclamation-circle"></i>{error}</div>
-                    // need to change fname and lname to "First name and Last name"
+                    let newError;
+                    if (error.includes('Fname')) {
+                        newError = error.replace(error, "First name can't be blank")
+                        return <div key={i}><i className="fas fa-exclamation-circle"></i>{newError}</div>
+                    } else if (error.includes('Lname')) {
+                        newError = error.replace(error, "Last name can't be blank")
+                        return <div key={i}><i className="fas fa-exclamation-circle"></i>{newError}</div>
+                    } else {
+                        return <div key={i}><i className="fas fa-exclamation-circle"></i>{error}</div>
+                    }
+                    
                 })}
             </ul>
         );
@@ -40,6 +55,7 @@ class SignupForm extends React.Component {
     }
 
     render () {
+
         return (
             <div className="signup-container">
                 <form onSubmit={this.handleSubmit} className="signup-form-box">
@@ -52,13 +68,13 @@ class SignupForm extends React.Component {
                     </div>
                     <div className="input-fields">
                     <div className="signup-name">
-                            <input type="text" onChange={this.update('fname')} value={this.state.fname} placeholder="First name"/>
-                                <input type="text" onChange={this.update('lname')} value={this.state.lname} placeholder="Last name"/>
+                        <input type="text" onChange={this.update('fname')} value={this.state.fname} placeholder="First name"/>
+                        <input type="text" onChange={this.update('lname')} value={this.state.lname} placeholder="Last name"/>
                         </div>
                         <br/>
-                        <input className="signup" type="text" onChange={this.update('email')} value={this.state.email} placeholder="Email address"/>
+                        <input className="signup" type="email" onChange={this.update('email')} value={this.state.email} placeholder="Email address"/>
                         <br/>
-                        <input className="signup" type="text" onChange={this.update('username')} value={this.state.username} placeholder="Username" />
+                        <input className="signup" type="text" onChange={this.update('username')} value={this.state.username} placeholder="Username"/>
                         <br/>
                         <input className="signup" type="password" onChange={this.update('password')} value={this.state.password} placeholder="Password (min. 7 characters)" />
                         <div className="errors">{this.renderErrors()}</div>

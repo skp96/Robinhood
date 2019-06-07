@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.fetchCompanyAndQuoteData = fetchCompanyAndQuoteData("FB")
     // window.fetchStocks = fetchStocks()
 
-
     window.getState = store.getState
     window.store = store;
     const root = document.getElementById('root') 

@@ -1,9 +1,15 @@
+.stock-transactions-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .stock-main {
     display: flex;
     flex-direction: column;
     padding-top: 99px;
     margin-left: 130px;
-    width: 687px;
+    width: 677px;
 }
 
 .about-line {

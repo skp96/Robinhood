@@ -8,3 +8,5 @@
 
 
 stocks = Stock.create([{symbol: "AAPL", name: "Apple"}, {symbol: "FB", name: "Facebook"}, {symbol: "TSLA", name: "Tesla"}])
+
+demoUser = User.create(fname: "Robin", lname: "Hood", email:"robinhood@robinhood.com", username: "robinhood", password: "littlehood" )

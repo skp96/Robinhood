@@ -1,0 +1,131 @@
+.transaction-container {
+    padding-top: 72px;
+    margin-left: 71px;
+    margin-right: 128px;
+    width: 282px;
+}
+
+.transaction-watchlist {
+    position: fixed;
+}
+
+.transaction {
+    margin: 24px; 
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
+    width: 275px;
+    height: 379px;
+}
+
+.transaction-table {
+    
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+.transaction-table  th {
+    padding-top: 21px;
+    padding-bottom: 17px;
+    margin: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid whitesmoke;
+    width: 100%;
+}
+
+.transaction-table tbody  td {
+    padding-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+}
+
+#upper {
+    padding-top: 33px;
+    padding-bottom: 31px;
+}
+
+.table-market-price td {
+    border-bottom: 1px solid whitesmoke;
+}
+
+#table-market-price-lable {
+    color: #21ce99
+}
+#table-input {
+    text-align: right;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    color: lightgray;
+    font-size: 12px;
+    padding: 10px;
+    width: 60px;
+}
+
+#table-input::-webkit-outer-spin-button, #table-input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0
+}
+
+#table-input:hover {
+    text-align: right;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    color: lightgray;
+    font-size: 12px;
+    padding: 10px;
+    width: 60px;
+    -webkit-transition: 0.5s;
+}
+
+#table-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #21ce99;
+    background-color: white;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.transaction button {
+    padding: 21px 77px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #21ce99;
+    color: white;
+}
+.transaction button:hover {
+    cursor: pointer;
+    padding: 21px 77px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(26, 233, 170);
+    color: white;
+}
+.transaction p {
+    border-top: 1px solid whitesmoke;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    margin-top: 26px;
+    padding: 20px 45px;
+}
+
+.add-watchlist-button {
+    padding: 21px 73px  21px 77px;
+    margin-left: 40px;
+    border: 1px solid #21ce99;
+    border-radius: 5px;
+    background-color: white;
+    color: #21ce99;
+}
+
+.add-watchlist-button:hover {
+    padding: 21px 73px  21px 77px;
+    margin-left: 40px;
+    border: 1px solid rgb(26, 233, 170);
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(26, 233, 170);
+}

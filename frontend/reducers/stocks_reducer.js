@@ -47,6 +47,7 @@ const stocksReducer = (oldState = {}, action) => {
             newState[action.symbol].week52Low = quote.week52Low
             newState[action.symbol].changePercent = quote.changePercent
             newState[action.symbol].previousClose = quote.previousClose
+            newState[action.symbol].symbol = action.symbol;
 
             return newState;
 

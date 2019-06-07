@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import NavBarNoUser from '../nav/nav_bar_no_user';
 
-const HomeNoUser = () => {
+const HomeNoUser = (props) => {
         return (
             <div className="home-nouser">
                 <div className="nav-bar">
@@ -20,6 +20,11 @@ const HomeNoUser = () => {
                         <div className="home-signup-button">
                             <button>
                                 <Link to="/signup" className="link">Sign Up</Link>
+                            </button>
+                        </div>
+                        <div className="demo-login">
+                            <button onClick={() => props.login({username: "robinhood", password: "littlehood"})}>
+                                Demo Log In
                             </button>
                         </div>
                     </div>

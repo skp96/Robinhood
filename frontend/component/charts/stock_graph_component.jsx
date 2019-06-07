@@ -30,8 +30,6 @@ class StockGraph extends React.Component {
         }
         if (prices[prices.length - 1] > 0) {
             currPrice = `$${(prices[prices.length - 1])}`
-        } else if (prices[prices.length - 1] < 0) {
-            currPrice = `-$${(prices[prices.length - 1]) * -1}`
         }
         return currPrice
 
@@ -108,7 +106,7 @@ class StockGraph extends React.Component {
             </div>
             
             <div className="line-graph">
-                <LineChart width={750} height={250} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
+                    <LineChart width={677} height={250} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
                     <XAxis dataKey="label" hide={true} />
                     <YAxis hide={true} domain={['dataMin', 'dataMax']}/>
                     <Tooltip />

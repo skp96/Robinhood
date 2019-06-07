@@ -12,7 +12,7 @@ class HomeIndex extends React.Component {
             )
         } else {
             return (
-                <HomeNoUser />
+                <HomeNoUser login={this.props.login}/>
             )
         }
     }

@@ -93,7 +93,7 @@ class StockGraph extends React.Component {
         }
 
         if (!stockInfo.name) {return null}
-
+        
         return (
         <div className="graph">
             <div className="graph-fin-metrics">

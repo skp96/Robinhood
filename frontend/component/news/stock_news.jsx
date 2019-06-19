@@ -3,9 +3,9 @@ import React from 'react'
 class StockNews extends React.Component {
     render () {
         let stockNews = this.props.stockNews ? this.props.stockNews : []
-        const newsData = stockNews.map(news => {
+        const newsData = stockNews.map((news, idx) => {
             return (
-                <li>
+                <li key={idx}>
                     <a href={news.url} className="stock-news-item">
                         <img src={news.image} width="200" height="200" />
                         <div className="news-content">

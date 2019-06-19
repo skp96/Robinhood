@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 let emailRegex = RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+
 const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
     Object.values(formErrors).forEach(val => {
@@ -53,11 +54,11 @@ class SignupForm extends React.Component {
         labels.forEach((label) => {
             if (label === "fname" && state[label].length < 3) {
                 formErrors[label] = "First name must be atleast 3 characters"
-            } else if (label === 'lname' && state[label].length < 5) {
+            } else if (label === 'lname' && state[label].length < 3) {
                 formErrors[label] = "Last name must have atleast 5 characters"
             } else if (label === 'username' && state[label].length < 5) {
                 formErrors[label] = "Username must have atleast 5 characters"
-            } else if (label === 'email' && !emailRegex.test(state.label)) {
+            } else if (label === 'email' && !emailRegex.test(state[label])) {
                 formErrors[label] = "Please enter a valid email address"
             } else if (label === 'password' && state[label].length < 7) {
                 formErrors[label] = "Your password must be atleast 7 characters"
@@ -72,7 +73,7 @@ class SignupForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-
+        debugger
         this.checkforErrors()
 
         if (formValid(this.state)) {

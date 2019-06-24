@@ -33,8 +33,12 @@
     width: 100%;
 }
 
+/* .table-sell{
+    padding-right: 20px;
+} */
+
 .transaction-table tbody  td {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
 }
@@ -54,9 +58,9 @@
 #table-input {
     text-align: right;
     background-color: whitesmoke;
-    border: none;
+    border: 1px solid white;
     border-radius: 5px;
-    color: lightgray;
+    color: black;
     font-size: 12px;
     padding: 10px;
     width: 60px;
@@ -72,7 +76,7 @@
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 5px;
-    color: lightgray;
+    color: black;
     font-size: 12px;
     padding: 10px;
     width: 60px;
@@ -83,12 +87,14 @@
     outline: none;
     box-shadow: 0 0 0 2px #21ce99;
     background-color: white;
+    color: black;
     font-size: 12px;
     padding: 10px;
 }
 
 .transaction button {
     padding: 21px 77px;
+    width: 85%;
     margin-left: 20px;
     border: none;
     border-radius: 5px;
@@ -104,11 +110,16 @@
     background-color: rgb(26, 233, 170);
     color: white;
 }
+
+.transaction button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px;
+}
 .transaction p {
     border-top: 1px solid whitesmoke;
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
-    margin-top: 26px;
+    margin-top: 12px;
     padding: 20px 45px;
 }
 

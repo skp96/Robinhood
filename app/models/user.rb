@@ -18,7 +18,16 @@ class User < ApplicationRecord
     validates :username, :session_token, uniqueness: true
     validates :password, length: {minimum: 7}, allow_nil: true
 
-    #need to add associations
+    has_one :portfolio
+
+    has_many :portfolio_joins,
+        through: :portfolio,
+        source: :portfolio_joins
+
+
+    has_many :transactions,
+        through: :portfolio,
+        source: :transactions
     
     after_initialize :ensure_session_token
     attr_reader :password

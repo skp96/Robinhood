@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_123036) do
+ActiveRecord::Schema.define(version: 2019_06_23_134943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "portfolio_joins", force: :cascade do |t|
+    t.bigint "portfolios_id"
+    t.bigint "stocks_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "shares", null: false
+    t.index ["portfolios_id"], name: "index_portfolio_joins_on_portfolios_id"
+    t.index ["stocks_id"], name: "index_portfolio_joins_on_stocks_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "buying_power", default: 0, null: false
+    t.index ["user_id"], name: "index_portfolios_on_user_id", unique: true
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string "symbol", null: false
@@ -21,6 +37,15 @@ ActiveRecord::Schema.define(version: 2019_06_03_123036) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["symbol"], name: "index_stocks_on_symbol", unique: true
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "portfolio_id", null: false
+    t.integer "stock_id", null: false
+    t.integer "purchase_price", null: false
+    t.integer "shares", null: false
+    t.index ["portfolio_id"], name: "index_transactions_on_portfolio_id"
+    t.index ["stock_id"], name: "index_transactions_on_stock_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +62,6 @@ ActiveRecord::Schema.define(version: 2019_06_03_123036) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "portfolio_joins", "portfolios", column: "portfolios_id"
+  add_foreign_key "portfolio_joins", "stocks", column: "stocks_id"
 end

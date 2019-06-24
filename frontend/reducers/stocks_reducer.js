@@ -1,7 +1,6 @@
 import {
     RECEIVE_ALL_STOCKS, 
-    RECEIVE_STOCK, //request not working, need to fix
-    RECEIVE_USER_STOCKS,
+    RECEIVE_STOCK,
     RECEIVE_STOCK_DATA,
     RECEIVE_CHART_DATA,
     RECEIVE_CHART_DATA_1D,
@@ -14,6 +13,18 @@ const stocksReducer = (oldState = {}, action) => {
     let newState = merge({}, oldState);
 
     switch(action.type) {
+
+        case RECEIVE_STOCK: {
+            if (!newState["current_stock"]) {
+                newState["current_stock"] = {}
+            }
+           const {symbol, name} = action.stock
+           
+           newState["current_stock"] = action.stock
+
+           return newState
+        } 
+        
         case RECEIVE_ALL_STOCKS:
             action.stocks.map(obj => {
                 return newState[obj.symbol] = obj.name

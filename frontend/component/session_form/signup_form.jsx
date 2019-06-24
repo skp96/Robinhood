@@ -73,7 +73,6 @@ class SignupForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        debugger
         this.checkforErrors()
 
         if (formValid(this.state)) {

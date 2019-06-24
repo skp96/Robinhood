@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: portfolio_joins
+#
+#  id            :bigint           not null, primary key
+#  portfolios_id :bigint
+#  stocks_id     :bigint
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  shares        :integer          not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  portfolios: one
+  stocks: one
+
+two:
+  portfolios: two
+  stocks: two

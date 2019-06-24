@@ -1,6 +1,5 @@
 import * as StockApiUtil from '../util/stock_api_util';
 
-export const RECEIVE_USER_STOCKS = 'RECEIVE_USER_STOCKS';
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 export const RECEIVE_STOCK_DATA = 'RECEIVE_STOCK_DATA';
 export const RECEIVE_ALL_STOCKS = 'RECEIVE_ALL_STOCKS';
@@ -8,12 +7,7 @@ export const RECEIVE_CHART_DATA = 'RECEIVE_CHART_DATA';
 export const RECEIVE_CHART_DATA_1D = 'RECEIVE_CHART_DATA_1D'
 export const RECEIVE_NEWS = 'RECEIVE_NEWS';
 
-// export const getAllStocks = () => {
-// }
-// not sure if the request is being made correctly -- haven't 
-// created user to port to stock assocation yet
 
-// stockapiutil not working, need to fix
 const receiveStock = (stock) => {
     return {
         type: RECEIVE_STOCK,
@@ -60,11 +54,20 @@ const receiveNews = (symbol, news) => {
     }
 }
 
-// stockapiutil not working, need to fix
+export const saveStock = (stock) => {
+    return (dispatch) => {
+        return StockApiUtil.saveStock(stock).then(stock => {
+            return dispatch(receiveStock(stock))
+        });
+    };
+}
+
 export const getStock = (symbol) => {
     return (dispatch) => {
         return StockApiUtil.getStock(symbol).then(stock => {
             return dispatch(receiveStock(stock))
+        }, err => {
+            return dispatch(saveStock(symbol))
         });
     };
 }

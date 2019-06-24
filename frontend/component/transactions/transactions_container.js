@@ -2,8 +2,10 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Transactions from './transactions'
 import { fetchCompanyAndQuoteData, fetchStockChartData1d } from '../../actions/stock_actions'
+import {getStock, saveStock} from '../../actions/stock_actions'
 
 const mapStateToProps = (state, ownProps) => {
+
     return {
         currentUser: state.entities.users[state.session.id],
         stock: state.entities.stocks[ownProps.match.params.symbol],
@@ -13,7 +15,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCompanyAndQuoteData: (symbol) => dispatch(fetchCompanyAndQuoteData(symbol)),
-        fetchStockChartData1d: (symbol) => dispatch(fetchStockChartData1d(symbol))
+        fetchStockChartData1d: (symbol) => dispatch(fetchStockChartData1d(symbol)),
+        createTransaction: (transaction) => dispatch(createTransaction(transaction)),
+        getStock: (stock) => dispatch(saveStock(stock)),
+        saveStock: (stock) => dispatch(getStock(stock))
     }
 }
 

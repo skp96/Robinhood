@@ -148,7 +148,10 @@
 
 .errorhandler {
     position: relative;
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     -webkit-user-select: none;
     user-select: none;
     background-color: rgba(0, 0, 0, 0.507);

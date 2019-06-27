@@ -18,6 +18,7 @@ const receiveTransactions = (transactions) => {
 }
 
 export const createTransaction = (transaction) => {
+
     return (dispatch) => {
         return TransactionApiUtil.createTransaction(transaction).then(transactions => {
             return dispatch(receiveTransactions(transactions))

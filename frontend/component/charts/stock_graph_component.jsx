@@ -41,7 +41,7 @@ class StockGraph extends React.Component {
         let chartData = this.props.chartData ? this.props.chartData : []
 
         let prices = [];
-        for (var i = 0; i < chartData.length; i++) {
+        for (let i = 0; i < chartData.length; i++) {
             prices.push(chartData[i].price)
         }
 
@@ -59,7 +59,7 @@ class StockGraph extends React.Component {
         let chartData = this.props.chartData ? this.props.chartData : []
 
         let prices = [];
-        for (var i = 0; i < chartData.length; i++) {
+        for (let i = 0; i < chartData.length; i++) {
             prices.push(chartData[i].price)
         }
 
@@ -106,7 +106,7 @@ class StockGraph extends React.Component {
             </div>
             
             <div className="line-graph">
-                    <LineChart width={677} height={250} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
+                <LineChart width={677} height={250} data={chartData} margin={{top: 5, right: 3, left: 0, bottom: 5}}>
                     <XAxis dataKey="label" hide={true} />
                     <YAxis hide={true} domain={['dataMin', 'dataMax']}/>
                     <Tooltip />

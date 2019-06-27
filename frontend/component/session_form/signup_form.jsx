@@ -94,7 +94,8 @@ class SignupForm extends React.Component {
                     username: "",
                     email: "",
                     password: "",
-                }, })
+                },
+            })
         }.bind(this))
     }
 
@@ -162,5 +163,6 @@ class SignupForm extends React.Component {
         )
     }
 }
+
 
 export default SignupForm;

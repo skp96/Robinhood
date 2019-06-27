@@ -45,7 +45,6 @@ class Transactions extends React.Component {
     }
 
     handleSubmit() {
-        let marketPrice = this.calculateCurrPrice()
         let stockInfo = this.props.stock ? this.props.stock : {
             name: "",
             about: "",
@@ -69,12 +68,38 @@ class Transactions extends React.Component {
         }
 
         let stock = {symbol: stockInfo.symbol, name: stockInfo.name}
-        debugger
+        let num_of_shares = this.state.shares
+
+        let choice = document.getElementById("buy-sell-button").innerHTML
+
+        if (choice === "Buy") {
+            num_of_shares = this.state.shares * 1
+        } else {
+            num_of_shares = this.state.shares * -1
+        }
+
         this.props.getStock(stock).then(stock => {
-            let transaction = { portfolio_id: this.props.currentUser.portfolio.id, stock_id: stock.id, purchase_price: stockInfo.close, shares: this.state.shares}
+            let transaction = { portfolio_id: this.props.currentUser.portfolio.id, stock_id: stock.stock.id, purchase_price: stockInfo.close, shares: num_of_shares}
             this.props.createTransaction(transaction)
         })
+        return this.setState({["shares"]: 0})
+    }
 
+    handleSell() {
+        let sellButton = document.getElementById("buy-sell-button")
+        sellButton.innerHTML = "Sell"
+
+        let proceeds = document.getElementById("cost-proceeds")
+        proceeds.innerHTML = "Estimated Proceeds"
+    }
+
+    handleBuy() {
+        let buyButton = document.getElementById("buy-sell-button")
+        buyButton.innerHTML = "Buy"
+
+
+        let proceeds = document.getElementById("cost-proceeds")
+        proceeds.innerHTML = "Estimated Cost"
     }
     
     render () {
@@ -109,8 +134,8 @@ class Transactions extends React.Component {
                         <table className="transaction-table">
                             <thead>
                                 <tr>
-                                    <th align="left">Buy {stockInfo.symbol}</th>
-                                    <th align="left" >Sell {stockInfo.symbol}</th>
+                                    <th align="left" onClick={this.handleBuy} className="buy-option">Buy {stockInfo.symbol}</th>
+                                    <th align="left" onClick={this.handleSell} className="sell-option">Sell {stockInfo.symbol}</th>
                                     <th align="right">...</th>
                                 </tr>
                             </thead>
@@ -125,7 +150,7 @@ class Transactions extends React.Component {
                                     <td align="right">${marketPrice}</td>
                                 </tr>
                                 <tr>
-                                    <td id="upper">Estimated Cost</td>
+                                    <td id="upper" id="cost-proceeds">Estimated Cost</td>
                                     <td align="right">${this.state.shares == "" ? 0.00 : Number(this.state.shares * marketPrice).toLocaleString(undefined, {maximumFractionDigits:2})}</td>
                                 </tr>
                             </tbody>
@@ -133,8 +158,8 @@ class Transactions extends React.Component {
                         </table>
                         
 
-                        <button onClick={() => this.handleSubmit()}>Buy</button>
-                        <p id="buy-sell-p-tag">${this.props.currentUser.portfolio.buying_power.toFixed(2)} Buying Power Available</p>
+                        <button onClick={() => this.handleSubmit()} id="buy-sell-button">Buy</button>
+                        <p id="buy-sell-p-tag">${this.props.currentUser.portfolio.buying_power.toLocaleString(undefined, {maximumFractionDigits:2})} Buying Power Available</p>
                     </div>
                     <button className="add-watchlist-button">Add to Watchlist</button>
                 </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const NavBarUser = (props) => {
     return (
         <nav className="user-nav">
-            <Link className="user-nav-home" to="/dashboard">
+            <Link className="user-nav-home" to="/">
                 <img src={window.logo} />
             </Link>
             <div className="user-nav-links">

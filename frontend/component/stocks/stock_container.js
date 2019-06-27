@@ -9,7 +9,6 @@ import {
 } from '../../actions/stock_actions'
 
 const mapStateToProps = (state, ownProps) => {
-
     return {
         currentUser: state.entities.users[state.session.id],
         stock: state.entities.stocks[ownProps.match.params.symbol],

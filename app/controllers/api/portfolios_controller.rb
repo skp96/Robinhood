@@ -1,4 +1,4 @@
-class API::PortfoliosController < ApplicationController
+class Api::PortfoliosController < ApplicationController
 
     def show 
         

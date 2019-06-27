@@ -19,6 +19,10 @@
     text-decoration: none;
 }
 
+.news-image {
+    padding-left: 20px;
+}
+
 .stock-news-container li:hover {
     background-color: whitesmoke;
 }
@@ -41,8 +45,8 @@
 }
 
 .news-content h4 {
-    width: 488px;
+    width: 450px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
     color: black;
 }

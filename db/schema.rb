@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_134943) do
+ActiveRecord::Schema.define(version: 2019_06_26_034528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(version: 2019_06_23_134943) do
 
   create_table "portfolios", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "buying_power", default: 0, null: false
+    t.integer "buying_power", default: 1000000, null: false
+    t.integer "portfolio_value", default: 1000000, null: false
     t.index ["user_id"], name: "index_portfolios_on_user_id", unique: true
   end
 

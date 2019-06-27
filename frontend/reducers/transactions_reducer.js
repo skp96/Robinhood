@@ -6,7 +6,6 @@ import {merge} from 'lodash'
 
 const transactionsReducer = (oldState = {}, action) => {
     Object.freeze(oldState)
-    let newState = merge({}, oldState)
 
     switch(action.type) {
 

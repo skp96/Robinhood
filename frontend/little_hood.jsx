@@ -6,7 +6,8 @@ import * as TransactionApiUtil from './util/transaction_api_util'
 import Root from './component/root'
 import configureStore from './store/store'
 
-import { fetchStockChartData, fetchStockChartData1d, fetchCompanyAndQuoteData, fetchStocks, getStock, saveStock, getAllStocks } from './actions/stock_actions'
+import { fetchStockChartData, fetchStockChartData1d, fetchCompanyAndQuoteData, fetchStocks, getStock, saveStock, getAllStocks  } from './actions/stock_actions'
+import { fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData} from './actions/portfolio_actions'
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -43,11 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.fetchStockChartData1d = fetchStockChartData1d("FB")
     // window.fetchCompanyAndQuoteData = fetchCompanyAndQuoteData("FB")
     // window.fetchStocks = fetchStocks()
-    // window.getStock = getStock("AAPL")
+    // window.getStock = getStock("ZYNE")
     // window.saveStock = saveStock({symbol: "GS", name: "Goldman Sachs"})
+    window.fetchPortfolio = fetchPortfolio(1)
+    window.fetchPortfolioStockPricesAndNews = fetchPortfolioStockPricesAndNews(["SNAP","FB","TSLA"])
+    window.fetchPortfolioStockChartData = fetchPortfolioStockChartData(["SNAP", "FB", "AAPL"], "3m")
 
     window.store = store
     window.getState = store.getState
+    window.dispatch = store.dispatch
     const root = document.getElementById('root') 
     ReactDOM.render(<Root store={store}/>, root)
 })

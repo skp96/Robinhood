@@ -4,6 +4,8 @@ import {
     RECEIVE_PORTFOLIO_STOCK_CHART
 } from '../actions/portfolio_actions'
 
+import { RECEIVE_TRANSACTION} from '../actions/transaction_action'
+
 import {merge} from 'lodash'
 
 const portfoliosReducer = (oldState = {}, action) => {
@@ -12,8 +14,20 @@ const portfoliosReducer = (oldState = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_PORTFOLIO:
-            return action.portfolio
+            return merge(newState, action.portfolio)
+        
+        case RECEIVE_TRANSACTION: 
+            let portfolio = newState["currentPortfolio"]
 
+            for (let i = 0; i < portfolio.length; i++) {
+                if (portfolio[i][action.transaction.symbol] != undefined) {
+                    portfolio[i][action.transaction.symbol] += action.transaction.shares
+                    return newState
+                }
+            }
+            portfolio.push({ [action.transaction.symbol]: action.transaction.shares })
+            return newState
+            
         case RECEIVE_PORTFOLIO_STOCK_DATA:
             let tickers = Object.keys(action.stockData)
 

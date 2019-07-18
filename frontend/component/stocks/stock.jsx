@@ -7,14 +7,13 @@ import TransactionsContainer from '../transactions/transactions_container'
 
 class Stock extends React.Component {
     componentDidMount() {
+        const { fetchPortfolio, currentUser } = this.props
         if (!this.props.stock) {
             const symbol = this.props.match.params.symbol
-            this.props.fetchCompanyAndQuoteData(symbol)
-            this.props.fetchStockNews(symbol)
+            // this.props.fetchCompanyAndQuoteData(symbol)
+            // this.props.fetchStockNews(symbol).then(fetchPortfolio(currentUser.portfolio.id))
         }
     }
-
-    
 
     formatCompanyInfo (info) {
         let formattedInfo = {}
@@ -45,6 +44,21 @@ class Stock extends React.Component {
         return formattedInfo
     }
 
+    getShares(){
+        let shares = 0
+
+        const { currentPortfolio } = this.props.portfolio
+        let port = currentPortfolio ? currentPortfolio : []
+
+        let ticker = this.props.match.params.symbol
+        for (let i = 0; i < port.length; i++) {
+            if (port[i][ticker] != undefined) {
+                shares = port[i][ticker]
+            }
+        }
+        return shares
+    }
+
  
     render() {
         let stockInfo = this.props.stock ? this.props.stock : {
@@ -71,7 +85,8 @@ class Stock extends React.Component {
         let formattedInfo = this.formatCompanyInfo(stockInfo)
         let stockNews = this.props.stock ? this.props.stock.news : []
 
-        
+        let totalShares = this.getShares()
+
         return (
             <div>
                 <NavBarUser logout={this.props.logout} />
@@ -143,7 +158,7 @@ class Stock extends React.Component {
                         <StockNews stockNews={stockNews} />
                     </div>
                     
-                    <TransactionsContainer />
+                    <TransactionsContainer shares={totalShares}/>
                 </div>
             </div>
         )

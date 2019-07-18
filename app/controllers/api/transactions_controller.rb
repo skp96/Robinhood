@@ -17,7 +17,13 @@ class Api::TransactionsController < ApplicationController
             else
                 @portfolio_join = PortfolioJoin.create(portfolios_id: @transaction.portfolio_id, stocks_id: @transaction.stock_id, shares: @transaction.shares)
             end
-            render 'api/transactions/index'
+            
+            value = (@transaction.shares * @transaction.purchase_price) * -1
+            @portfolio = current_user.portfolio
+            new_buying_power = @portfolio.buying_power + value
+            @portfolio.update(buying_power: new_buying_power)
+            @stock = Stock.find_by(id: @transaction.stock_id)
+            render 'api/transactions/show'
         else
             render json: @transaction.errors.full_messages, status: 422
         end

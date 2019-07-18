@@ -8,10 +8,8 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :stocks, only: [:index]
     get '/stocks/:symbol', to: 'stocks#show'
-    resources :portfolios, only: [:show]
+    resources :portfolios, only: [:show, :update]
     resources :transactions, only: [:index, :create]
-    resources :portfolio_joins, only: [:create]
-    get '/portfolio_joins/:portfolios_id', to: 'portfolio_joins#update'
-    get '/portfolio_joins/:portfolios_id', to: 'portfolio_joins#destroy'
+    resources :searches, only: [:show]
   end
 end

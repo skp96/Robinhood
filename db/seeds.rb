@@ -10,6 +10,7 @@ PortfolioJoin.destroy_all
 User.destroy_all
 Stock.destroy_all
 Portfolio.destroy_all
+Transaction.destroy_all
 
 stocks = Stock.create([{symbol: "AAPL", name: "Apple"}, {symbol: "FB", name: "Facebook"}, {symbol: "TSLA", name: "Tesla"}])
 

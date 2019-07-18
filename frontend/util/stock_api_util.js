@@ -1,11 +1,3 @@
-// export const saveStock = (stock) => {
-//     return $.ajax ({
-//         method: 'POST',
-//         url: 'api/stocks',
-//         data: {stock}
-//     });
-// }
-
 export const getStock = (stock) => {
     return $.ajax ({
         method: 'GET',
@@ -20,10 +12,10 @@ export const fetchCompanyAndQuoteData = (symbol) => {
     });
 }
 
-export const fetchStocks = () => {
+export const getAllStocks = () => {
     return $.ajax ({
         method: 'GET',
-        url: 'https://cloud.iexapis.com/stable/ref-data/symbols?token=sk_2694044421a2448b890da40e817a5833'
+        url: 'api/stocks'
     });
 }
 

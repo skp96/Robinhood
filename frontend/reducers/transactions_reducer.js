@@ -1,5 +1,5 @@
 import {
-    // RECEIVE_TRANSACTION,
+    RECEIVE_TRANSACTION,
     RECEIVE_TRANSACTIONS
 } from '../actions/transaction_action'
 import {merge} from 'lodash'
@@ -10,7 +10,9 @@ const transactionsReducer = (oldState = {}, action) => {
     switch(action.type) {
 
         case RECEIVE_TRANSACTIONS:
-            return action.transactions
+            return merge({}, oldState, action.transactions)
+        case RECEIVE_TRANSACTION:
+            return merge({}, oldState, action.transaction)
         default:
             return oldState
     }

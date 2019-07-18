@@ -5,11 +5,10 @@ import HomeNoUser from './home_no_user'
 class HomeIndex extends React.Component {
     
     render () {
-        const { logout, currentUser, portfolio, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData } = this.props
-
+        const { logout, currentUser, portfolio, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData, fetchTransactions, transactions  } = this.props
         if(currentUser) {
             return (
-                <HomeUser logout={logout} currentUser={currentUser} portfolio={portfolio} fetchPortfolio={fetchPortfolio} fetchPortfolioStockPricesAndNews={fetchPortfolioStockPricesAndNews} fetchPortfolioStockChartData={fetchPortfolioStockChartData}/>
+                <HomeUser logout={logout} currentUser={currentUser} portfolio={portfolio} transactions={transactions} fetchPortfolio={fetchPortfolio} fetchPortfolioStockPricesAndNews={fetchPortfolioStockPricesAndNews} fetchPortfolioStockChartData={fetchPortfolioStockChartData} fetchTransactions={fetchTransactions} />
             )
         } else {
             return (

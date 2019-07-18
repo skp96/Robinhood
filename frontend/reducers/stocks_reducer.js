@@ -16,21 +16,22 @@ const stocksReducer = (oldState = {}, action) => {
 
         case RECEIVE_STOCK: {
             if (!newState["current_stock"]) {
-                newState["current_stock"] = {}
+                newState["currentStock"] = {}
             }
-           const {symbol, name} = action.stock
            
-           newState["current_stock"] = action.stock
+           newState["currentStock"] = action.stock
 
            return newState
         } 
         
         case RECEIVE_ALL_STOCKS:
-            action.stocks.map(obj => {
-                return newState[obj.symbol] = obj.name
-            })
+            if (!newState["allStocks"]) {
+                newState["allStocks"] = {}
+            }
 
-            return newState;
+            newState["allStocks"] = action.stocks
+
+            return newState
 
         case RECEIVE_STOCK_DATA:
             

@@ -9,7 +9,7 @@ export const createTransaction = (transaction) => {
 export const fetchTransactions = (portfolioId) => {
     return $.ajax({
         method: 'GET',
-        url: 'api/transaction',
+        url: 'api/transactions',
         data: {portfolioId}
     });
 }

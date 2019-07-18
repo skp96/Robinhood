@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.fetchStocks = fetchStocks()
     // window.getStock = getStock("ZYNE")
     // window.saveStock = saveStock({symbol: "GS", name: "Goldman Sachs"})
-    window.fetchPortfolio = fetchPortfolio(1)
-    window.fetchPortfolioStockPricesAndNews = fetchPortfolioStockPricesAndNews(["SNAP","FB","TSLA"])
-    window.fetchPortfolioStockChartData = fetchPortfolioStockChartData(["SNAP", "FB", "AAPL"], "3m")
+    // window.fetchPortfolio = fetchPortfolio(1)
+    // window.fetchPortfolioStockPricesAndNews = fetchPortfolioStockPricesAndNews(["SNAP","FB","TSLA"])
+    // window.fetchPortfolioStockChartData = fetchPortfolioStockChartData(["SNAP", "FB", "AAPL"], "3m")
 
     window.store = store
     window.getState = store.getState

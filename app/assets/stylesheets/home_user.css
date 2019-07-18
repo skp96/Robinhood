@@ -137,28 +137,83 @@
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
     width: 275px;
     height: 379px;
+    overflow: auto;
 }
 
-.portfolio-table {
-    
-    margin-left: 22px;
-    margin-right: 22px;
+.table-row-header {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid whitesmoke;
 }
 
-.portfolio-table  th {
-    padding-top: 21px;
-    padding-bottom: 17px;
+.table-row-header-cell {
+    flex-grow: 1;
+    width: 1px;
     margin: 24px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    border-bottom: 1px solid whitesmoke;
-    width: 100%;
+    font-size: 24px;
 }
 
-.portfolio-table tbody  td {
-    padding-top: 10px;
-    padding-bottom: 30px;
+.table-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.table-row:hover {
+    background-color: whitesmoke;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+  width: 0;
+}
+
+.table-cell {
+    flex-grow: 1;
+    width: 1px;
+    margin: 24px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+}
+
+.table-cell-chart {
+    flex-grow: 1;
+    width: 1px;
+    margin: 24px;
+    border-bottom: 2px dotted;
+}
+
+.user-transactions {
+    width: 100%;
+    display: none;
+}
+
+.show-transactions {
+    display: inline-block;
+}
+
+.user-transactions h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    padding: 30px 0px 23px 0px;
+    border-bottom: 1px solid lightgray;
+}
+
+.transactions-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+  width: 0;
+}
+
+.transactions-cell {
+    flex-grow: 1;
+    width: 1px;
+    margin: 24px;
+    font-family: 'Montserrat', sans-serif;
 }

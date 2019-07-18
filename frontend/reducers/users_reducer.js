@@ -1,12 +1,21 @@
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
+import { RECEIVE_TRANSACTION} from '../actions/transaction_action'
 import {merge} from 'lodash'
 
 const usersReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
+    let newState = merge({}, oldState)
     
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
-            return merge({}, oldState, { [action.currentUser.id]: action.currentUser})
+            return merge(newState, action.currentUser)
+        case RECEIVE_TRANSACTION:
+            let buyingPower = newState[action.transaction.user_id.id]["portfolio"]["buying_power"]
+            let value = action.transaction.price * action.transaction.shares
+            let newBuyingPower = buyingPower + (value * -1)
+
+            newState[action.transaction.user_id.id]["portfolio"]["buying_power"] = newBuyingPower
+            return newState
         default:
             return oldState;
     }

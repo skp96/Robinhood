@@ -106,7 +106,6 @@ class SignupForm extends React.Component {
         return (
             <ul>
                 {this.props.errors.map((error, i) => {
-                    debugger
                     if (error.includes("Fname")) {
                         let newError = error.replace("Fname", "First name")
                         return <div key={i}><i className="fas fa-exclamation-circle"></i>{newError}</div>    

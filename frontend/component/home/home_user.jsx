@@ -2,38 +2,58 @@ import React from 'react';
 import NavBarUser from '../nav/nav_bar_user'
 import { Link } from 'react-router-dom';
 import {LineChart, Line, XAxis, YAxis, Tooltip} from 'recharts'
+import NavBarContainer from '../nav/nav_container'
 
 class HomeUser extends React.Component {
     
     componentDidMount() {
-        const { currentUser, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData } = this.props
+        const { currentUser, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData, fetchTransactions } = this.props
             fetchPortfolio(currentUser.portfolio.id).then(data => {
                 let symbols = data.portfolio.currentPortfolio.map(object => {
                     return (Object.keys(object))
                 })
                 
-                fetchPortfolioStockPricesAndNews(symbols).then(() => {
-                    fetchPortfolioStockChartData(symbols, "1M")
-                })
-                
+                // fetchPortfolioStockPricesAndNews(symbols).then(() => {
+                //     fetchPortfolioStockChartData(symbols, "1M")
+                // })
+            })
+            fetchTransactions(currentUser.portfolio.id).then((data) => {
+                if (data.transactions["transactions"].length > 0) {
+                    let trans = document.getElementById("transactions")
+                    trans.classList.add("show-transactions")
+                }
             })
     }
 
+    portfolioValueCalc() {
+        const {stockData, currentPortfolio} = this.props.portfolio
+        let portfolioValue = 0
+
+        let data = stockData ? stockData : []
+        let currPort = currentPortfolio ? currentPortfolio : []
+
+        if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+                let ticker = data[i]["ticker"]
+                let price = data[i]["price"]
+                let shares = currPort[i][ticker]
+                portfolioValue += (price * shares)
+            }
+            return portfolioValue
+        } else {
+            return portfolioValue
+        }
+    }
+
     portfolioCalc() {
-        const {chart, stockData, currentPortfolio} = this.props.portfolio
-        const {portfolio_value} = this.props.currentUser.portfolio 
+        const {chart} = this.props.portfolio
+        const {buying_power} = this.props.currentUser.portfolio 
 
         let data = chart ? chart : []
-        let equityValues = stockData ? stockData : []
-        let portfolio = currentPortfolio ? currentPortfolio : []
         let placeholder = [{"label": "", "portValue": ""}]
 
         if (data.length != 0) {
-            let portfolioValue = portfolio_value
-
-            equityValues.forEach((equity, i) => {
-                return portfolioValue += (portfolio[i][equity["ticker"]] * equity["price"])
-            })
+            let portfolioValue = this.portfolioValueCalc() + buying_power
 
             let initialChartData = data[0]
             let remainingChartData = data.slice(1)
@@ -42,6 +62,7 @@ class HomeUser extends React.Component {
             for (let j = 0; j < initialChartData.chartData.length; j++) {
                 let initialTicker = initialChartData.chartData[j]
                 let firstTime = initialTicker.label
+
                 let firstTempPV = (portfolioValue * initialTicker.change)
                 let l = 0
                 let hash = { "label": "", "portValue": 0 }
@@ -50,6 +71,7 @@ class HomeUser extends React.Component {
                     
                     for (let k = 0; k < remainingChartData[l].chartData.length; k++) {
                         let otherticker = remainingChartData[l].chartData[k]
+                        
                         let secondTime = otherticker.label
                         let secondTempPv = firstTempPV
                         
@@ -64,7 +86,6 @@ class HomeUser extends React.Component {
                 }
                 finalData.push(hash)
             }
-            
             return finalData
         }
         return placeholder
@@ -156,21 +177,29 @@ class HomeUser extends React.Component {
     renderStockNews() {
         const {stockData} = this.props.portfolio
         let news = stockData ? stockData : []
-
+        
         if (news.length != 0) {
-            const newsData = news.map((obj,idx) => {
-                return (
-                    <li key={idx}>
-                        <a href={obj.news[0].url} className="portfolio-news-item">
-                            <img src={obj.news[0].image} width="200" height="200" className="portfolio-news-image" />
-                            <div className="portfolio-news-content">
-                                <h3>{obj.news[0].source}</h3>
-                                <h4>{obj.news[0].headline}</h4>
-                            </div>
-                        </a>
-                    </li>
-                )
-            })
+            let newsData = []
+
+            for (let i = 0; i < news.length; i++) {
+                let obj = news[i]
+
+                if (obj.news.length === 0) {
+                    continue;
+                } else {
+                    newsData.push(
+                        <li key={i}>
+                            <a href={obj.news[0].url} className="portfolio-news-item">
+                                <img src={obj.news[0].image} width="200" height="200" className="portfolio-news-image" />
+                                <div className="portfolio-news-content">
+                                    <h3>{obj.news[0].source}</h3>
+                                    <h4>{obj.news[0].headline}</h4>
+                                </div>
+                            </a>
+                        </li> 
+                    )
+                }
+            }
             return newsData
         } else {
             return news
@@ -184,7 +213,6 @@ class HomeUser extends React.Component {
 
         if (prices.length != 0 && stocks.length != 0) {
             let finalData = []
-
             for (let i = 0; i < stocks.length; i++) {
                 let newObj = {}
                 let stockObj = stocks[i]
@@ -193,33 +221,75 @@ class HomeUser extends React.Component {
                 newObj["price"] = stockprice
                 finalData.push(newObj)
             }
+    
             const tableBody = finalData.map(obj => {
                 return (
-                        <tr>
-                            <td align="left">{obj.ticker}</td>
-                            <td align="right">${obj.price}</td>
-                        </tr>
+                    <Link style={{ textDecoration: 'none', color: "black"}} to={`/stocks/${obj.ticker}`} className="table-row">
+                        <div className="table-cell">{obj.ticker}</div>
+                        <div className="table-cell-chart">{
+                            <LineChart width={45} height={16} data={[{ label: 1, portValue: 100 }, { label: 2, portValue: 98 }, { label: 3, portValue: 103 }, { label: 4, portValue: 76 }, { label: 5, portValue: 130 }]} margin={{ top: 5, right: 3, left: 0, bottom: 5 }}>
+                                <XAxis dataKey="label" hide={true} />
+                                <YAxis hide={true} domain={['dataMin', 'dataMax']} />
+                                <Line type="linear" dataKey="portValue" dot={false} stroke={this.color()} strokeWidth={2} />
+                            </LineChart>
+
+                        }</div>
+                        <div className="table-cell">${obj.price}</div>
+                        <div className="break"></div>
+                    </Link>
                 )
             })
             return tableBody
         } else {
             return (
-                <tr></tr>
+                <div ></div>
             )
         }
 
     }
+
+    renderTransactions() {
+        const {transactions} = this.props
+        let currTransactsions = transactions["transactions"] ? transactions["transactions"] : []
+        
+        let allTransactions = []
+
+        if (currTransactsions.length <= 10) {
+            for (let i = currTransactsions.length - 1; i >= 0; i--) {
+                let obj = currTransactsions[i]
+                allTransactions.push(
+                    <div className="transactions-row">
+                        <div className="transactions-cell">{obj.symbol}</div>
+                        <div className="transactions-cell">{obj.shares}</div>
+                        <div className="transactions-cell">${obj.purchasePrice}.00</div>
+                        <div className="break"></div>
+                    </div>
+                )
+            }
+        } else {
+            let i = 0
+            while (i < 10) {
+                let idx = currTransactsions.length - (i + 1)
+                let obj = currTransactsions[idx]
+                allTransactions.push(
+                    <div className="transactions-row">
+                        <div className="transactions-cell">{obj.symbol}</div>
+                        <div className="transactions-cell">{obj.shares}</div>
+                        <div className="transactions-cell">${obj.purchasePrice}</div>
+                    </div>
+                )
+                i++
+            }
+        }
+        return allTransactions
+    }
     
     render() {
-        // const {currentPortfolio, stockData, chart} = this.props.portfolio
-        // let portfolio = currentPortfolio ? currentPortfolio : []
-        // let securitiesData = stockData ? stockData : []
-        // let chartData = chart ? chart : []
         return (
             <>
                 <div className="main-user">
                     <div className="nav-bar">
-                        <NavBarUser logout={this.props.logout} />
+                        <NavBarContainer />
                     </div>
                 </div>
                 <div className="portfolio-container">
@@ -243,7 +313,6 @@ class HomeUser extends React.Component {
                         </div>
                         <div className="portfolio-datarange">
                             <ul>
-                                <li onClick={(e) => this.handleOnClick(e, "1d")}>1D</li>
                                 <li onClick={(e) => this.handleOnClick(e, "1m")}>1M</li>
                                 <li onClick={(e) => this.handleOnClick(e, "3m")}>3M</li>
                                 <li onClick={(e) => this.handleOnClick(e, "1y")}>1Y</li>
@@ -258,23 +327,29 @@ class HomeUser extends React.Component {
                                 {this.renderStockNews()}
                             </ul>
                         </div>
+                        <div className="user-transactions" id="transactions">
+                            <h1>Transactions</h1>
+                            <div className="transactions-table">
+                                <div className="transactions-row">
+                                    <div className="transactions-cell">Symbol</div>
+                                    <div className="transactions-cell">Shares</div>
+                                    <div className="transactions-cell">Purchase Price</div>
+                                </div>
+                                {this.renderTransactions()}
+                            </div>
+                        </div>
                     </div>
                     <div className="port-container">
                         <div className="portfolio-watchlist">
                             <div className="port">
-                                <table className="portfolio-table">
-                                    <thead>
-                                        <tr>
-                                            <th align="left" className="portfolio-header">Portfolio</th>
-                                            <th align="right">...</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody id="table-body">
-                                        {this.renderTableBody()}
-                                    </tbody>
-
-                                </table>
+                                <div className="table">
+                                    <div className="table-row-header">
+                                        <div className="table-row-header-cell">Portfolio</div>
+                                        <div className="table-row-header-cell"></div>
+                                        <div className="table-row-header-cell">...</div>
+                                    </div>
+                                    {this.renderTableBody()}
+                                </div>
                             </div>
                         </div>
                     </div>

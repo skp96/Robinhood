@@ -78,9 +78,9 @@ export const fetchCompanyAndQuoteData = (symbol) => {
     };
 }
 
-export const fetchStocks = () => {
+export const getAllStocks = () => {
     return (dispatch) => {
-        return StockApiUtil.fetchStocks().then(stocks => {
+        return StockApiUtil.getAllStocks().then(stocks => {
             return dispatch(receiveAllStocks(stocks))
         })
     }

@@ -222,9 +222,9 @@ class HomeUser extends React.Component {
                 finalData.push(newObj)
             }
     
-            const tableBody = finalData.map(obj => {
+            const tableBody = finalData.map((obj, idx) => {
                 return (
-                    <Link style={{ textDecoration: 'none', color: "black"}} to={`/stocks/${obj.ticker}`} className="table-row">
+                    <Link style={{ textDecoration: 'none', color: "black"}} to={`/stocks/${obj.ticker}`} className="table-row" key={idx}>
                         <div className="table-cell">{obj.ticker}</div>
                         <div className="table-cell-chart">{
                             <LineChart width={45} height={16} data={[{ label: 1, portValue: 100 }, { label: 2, portValue: 98 }, { label: 3, portValue: 103 }, { label: 4, portValue: 76 }, { label: 5, portValue: 130 }]} margin={{ top: 5, right: 3, left: 0, bottom: 5 }}>
@@ -306,8 +306,8 @@ class HomeUser extends React.Component {
                                 <LineChart width={677} height={250} data={this.portfolioCalc()} margin={{ top: 5, right: 3, left: 0, bottom: 5 }}>
                                     <XAxis dataKey="label" hide={true} />
                                     <YAxis hide={true} domain={['dataMin', 'dataMax']} />
-                                    <Tooltip />
-                                    <Line type="linear" dataKey="portValue" dot={false} stroke={this.color()} strokeWidth={2} />
+                                    {/* <Tooltip /> */}
+                                    <Line type="linear" dataKey="portValue" dot={false} stroke={this.color()} strokeWidth={2}/>
                                 </LineChart>
                             </div>
                         </div>

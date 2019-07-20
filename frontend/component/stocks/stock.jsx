@@ -1,7 +1,7 @@
 import React from 'react'
 import StockChartContainer from '../charts/stock_charts_container'
 import StockNews from '../news/stock_news'
-import NavBarUser from '../nav/nav_bar_user'
+import NavBarContainer from '../nav/nav_container'
 import TransactionsContainer from '../transactions/transactions_container'
 
 
@@ -89,7 +89,7 @@ class Stock extends React.Component {
 
         return (
             <div>
-                <NavBarUser logout={this.props.logout} />
+                <NavBarContainer  />
                 <div className="stock-transactions-container">
                     <div className="stock-main">
                         <StockChartContainer />

@@ -28,6 +28,18 @@
     height: 55px;
 }
 
+.fa-feather-alt{
+    font-size: 30px;
+    display: inline-block;
+    position: relative;
+    margin-top: 10px;
+    top: 5px;
+}
+
+.fa-feather-alt:hover {
+    color: #21ce99;
+}
+
 .user-nav-links button {
     background-color: #21ce99;
     color: white;
@@ -56,3 +68,249 @@
     outline: none;
     box-shadow: 0 0 0 2px;
 }
+
+.search-bar-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f4f4f5;
+    border-radius: 5px;
+    margin: 10px;
+    align-items: center;
+    width: 480px;
+    height: 40px;
+    color: #cbcbcd;
+    box-shadow: none;
+    transition: box-shadow 150ms ease-in-out;
+}
+
+.search-bar-container:hover {
+    box-shadow: 0 3px 24px rgba(48, 51, 51, 0.09);
+    border: none;
+    color: black;
+}
+
+.search-bar-form {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 450px;
+}
+
+.search-input {
+    height: 14px;
+    width: 480px;
+    border: none;
+    outline: none;
+    padding: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+.search-bar-container:focus-within {
+    box-shadow: 0 3px 24px rgba(48, 51, 51, 0.09);
+    border: none;
+    color: black;
+    background-color: #fff;
+}
+
+.search-input:hover::-webkit-input-placeholder {
+    color: black;
+}
+
+.search-input:hover::-moz-placeholder {
+    color: black;
+}
+
+.search-input:hover::-ms-input-placeholder {
+    color: black;
+}
+
+.fa-search{
+    font-size: 20px;
+}
+
+.search-results {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0px 20px 20px rgba(48, 51, 51, 0.09);
+    border: none;
+    color: black;
+    width: 100%;
+    display: none;
+}
+
+.search-bar-container:focus-within .search-results {
+    display: inline;
+}
+
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: black;
+}
+
+.search-row:hover {
+    background-color: whitesmoke;
+    color: #21ce99
+}
+
+.search-cell {
+    flex-grow: 1;
+    width: 1px;
+    margin: 10px 10px 5px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.search-cell-error {
+    margin: 10px 10px 5px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.general-items {
+    display: flex; 
+    align-items: center;
+    padding: 10px 74px 0px 0px;
+}
+
+.general-items div {
+    margin: 24px;
+}
+
+.home-link {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: 900;
+}
+
+.home-link:hover {
+    color: #21ce99;
+}
+
+.fa-feather-alt {
+    height: 55px;
+    width: 55px;
+}
+
+.home-notification button {
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: 900;
+}
+
+.home-notification button:hover {
+    color: #21ce99;
+    cursor: pointer;
+}
+
+.notfication-contents {
+    visibility: hidden;
+    position: fixed;
+    width: 340px;
+    right: 45px;
+    padding: 24px 32px;
+    border: 1px solid #fff;
+    background-color: #fff;
+    z-index: 9999;
+    box-shadow: 0px 20px 20px rgba(48, 51, 51, 0.09);
+
+}
+
+.home-notification:focus-within button {
+    color: #21ce99;
+    border-bottom: 2px solid #21ce99;
+}
+
+.home-notification:focus-within .notfication-contents{
+    visibility: visible
+}
+
+.notfication-contents li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.account-info button{
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: 900;
+}
+
+.account-info button:hover {
+    color: #21ce99;
+    cursor: pointer;
+}
+
+.account-content {
+    visibility: hidden;
+    position: fixed;
+    width: 220px;
+    right: 45px;
+    padding: 24px 32px;
+    border: 1px solid #fff;
+    background-color: #fff;
+    z-index: 9999;
+    box-shadow: 0px 20px 20px rgba(48, 51, 51, 0.09);
+}
+
+.account-info:focus-within button {
+    color: #21ce99;
+    border-bottom: 2px solid #21ce99;
+}
+
+.change-to-visible{
+    visibility: visible
+}
+
+.account-content li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.account-content li:first-child {
+    font-weight: 900;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.account-content li:nth-child(2) {
+    font-weight: 900;
+    padding: 3px;: 
+}
+
+.account-content li:nth-child(3) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.account-content li:nth-child(4) {
+    border-bottom: 1px solid whitesmoke;
+}
+
+.account-content li:nth-child(5) {
+    margin-top: 10px;
+}
+
+.account-content li:nth-child(5):hover {
+    cursor: pointer;
+    color: #21ce99;
+}
+
+.fa-sign-out-alt {
+    font-size: 15px;
+    margin-right: 5px;
+}
+

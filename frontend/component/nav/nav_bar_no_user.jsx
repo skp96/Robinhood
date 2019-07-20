@@ -5,9 +5,8 @@ const NavBarNoUser = () => {
     return (
         <nav className="login-signup">
             <div className="profile">
-                <img src={window.logo} />
                 <Link className="nav-home" to="/">
-                    <p>littlehood</p>
+                    <i class="fas fa-feather-alt">littlehood</i>
                 </Link>
                 <a href="https://github.com/skp96" className="github">Github</a>
                 <a href="https://www.linkedin.com/in/sunny-patel-b0729858/" className="linkedin">LinkedIn</a>

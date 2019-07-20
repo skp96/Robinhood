@@ -1,10 +1,11 @@
-class API::SearchesController < ApplicationController
+class Api::SearchesController < ApplicationController
+
     def show 
         if params[:id] == ""
             @searches = []
         else
             str = "%#{params[:id]}%"
-            @searches = Stocks.where("stocks.symbols LIKE UPPER(:query)", query: str )
+            @searches = Stock.where("symbol LIKE UPPER(:query)", query: str ).limit(6)
         end
         render :show
     end

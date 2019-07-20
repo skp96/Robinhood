@@ -1,7 +1,8 @@
 import {
     RECEIVE_PORTFOLIO,
     RECEIVE_PORTFOLIO_STOCK_DATA,
-    RECEIVE_PORTFOLIO_STOCK_CHART
+    RECEIVE_PORTFOLIO_STOCK_CHART,
+    RECEIVE_SEARCHED_STOCKS,
 } from '../actions/portfolio_actions'
 
 import { RECEIVE_TRANSACTION} from '../actions/transaction_action'
@@ -63,6 +64,9 @@ const portfoliosReducer = (oldState = {}, action) => {
                 return newState["chart"].push({["ticker"]: el, ["chartData"]: dollarPriceChanges})
             })
             return newState
+        
+        case RECEIVE_SEARCHED_STOCKS: 
+            return merge(newState, action.searchedStocks)
 
         default:
             return oldState

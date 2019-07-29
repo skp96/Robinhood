@@ -33,7 +33,6 @@ const portfoliosReducer = (oldState = {}, action) => {
             let tickers = Object.keys(action.stockData)
 
             newState["stockData"] = []
-            debugger
             tickers.forEach(el => {
                return newState["stockData"].push({["ticker"]: el, ["price"]: action.stockData[el].quote.latestPrice, ["news"]: action.stockData[el].news })
             });

@@ -2,7 +2,7 @@ class Api::TransactionsController < ApplicationController
 
     def create 
         @transaction = Transaction.new(transaction_params)
-
+    
         if @transaction.save
             @transactions = Transaction.where(params[:portfolio_id])
             @portfolio_join = PortfolioJoin.find_by(stocks_id: @transaction.stock_id)

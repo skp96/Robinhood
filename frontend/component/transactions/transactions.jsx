@@ -1,4 +1,6 @@
 import React from 'react'
+import { addToWatchlist, removeFromWatchlist } from '../../util/watchlist_api_util';
+import { fetchPortfolioStockPricesAndNews } from '../../actions/portfolio_actions';
 
 class Transactions extends React.Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class Transactions extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleSell = this.handleSell.bind(this)
         this.handleBuy = this.handleBuy.bind(this)
+        this.handleWatchlist = this.handleWatchlist.bind(this)
     }
 
     componentDidUpdate(prevProps) {
@@ -35,13 +38,63 @@ class Transactions extends React.Component {
     }
 
     componentDidMount() {
-        const {fetchCompanyAndQuoteData, fetchPortfolio, fetchStockChartData1d, currentUser} = this.props
+        const { fetchCompanyAndQuoteData, fetchPortfolio, fetchStockChartData1d, currentUser, fetchWatchlist} = this.props
         if (!this.props.stock) {
             const symbol = this.props.match.params.symbol
-            fetchCompanyAndQuoteData(symbol).then(fetchPortfolio(currentUser.portfolio.id))
-            // .then(fetchStockChartData1d(symbol)) goes between CompnayAndQuoteData and fetchPort
+            fetchCompanyAndQuoteData(symbol).then(fetchStockChartData1d(symbol)).then(fetchPortfolio(currentUser.portfolio.id))
         }
         document.getElementById("root").addEventListener("click", this.removeErrors);
+
+        fetchWatchlist(currentUser.id).then(data => {
+            
+            let watchList = data.watchlist.watchlist
+            let button = document.getElementById('watchlist-button')
+
+            if (watchList.length === 0 ) {
+                button.innerHTML = "Add to Watchlist"
+            } else {
+                for (let i = 0; i < watchList.length; i++) {
+                    let obj = watchList[i]
+                    let sym = this.props.match.params.symbol
+                    
+                    if (obj.symbol === sym) {
+                        button.innerHTML = "Remove from Watchlist"
+                        break
+                    } else {
+                        button.innerHTML = "Add to Watchlist"
+                    }
+                }
+            }
+        })
+
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
+            const { fetchWatchlist, currentUser, fetchStockChartData1d} = this.props
+            fetchWatchlist(currentUser.id).then(data => {
+
+                let watchList = data.watchlist.watchlist
+                let button = document.getElementById('watchlist-button')
+
+                if (watchList.length === 0) {
+                    button.innerHTML = "Add to Watchlist"
+                } else {
+                    for (let i = 0; i < watchList.length; i++) {
+                        let obj = watchList[i]
+                        let sym = this.props.match.params.symbol
+
+                        if (obj.symbol === sym) {
+                            button.innerHTML = "Remove from Watchlist"
+                            break
+                        } else {
+                            button.innerHTML = "Add to Watchlist"
+                        }
+                    }
+                }
+            })
+            fetchStockChartData1d(this.props.match.params.symbol)
+        }
     }
 
     updateShares(field) {
@@ -49,27 +102,23 @@ class Transactions extends React.Component {
     }
     
     calculateCurrPrice() {
-        let currPrice = 2
-        // "$0.00"
-        // let chartData = []
+        let currPrice = "$0.00"
+        let chartData = []
 
-        // if (this.props.stock) {
-        //     if (this.props.stock.chartData1d) {
-        //         chartData = this.props.stock.chartData1d
-        //     }
-        // }
+        if (this.props.stock) {
+            if (this.props.stock.chartData1d) {
+                chartData = this.props.stock.chartData1d
+            }
+        }
 
-        // let prices = []
-        // for (var i = 0; i < chartData.length; i++) {
-        //     prices.push(chartData[i].price)
-        // }
-        // if (prices[prices.length - 1] > 0) {
-        //     currPrice = prices[prices.length - 1]
-        // }
-        // return parseFloat(currPrice).toFixed(2)
-
-        return currPrice
-
+        let prices = []
+        for (var i = 0; i < chartData.length; i++) {
+            prices.push(chartData[i].price)
+        }
+        if (prices[prices.length - 1] > 0 || prices[prices.length - 1] !== null ) {
+            currPrice = prices[prices.length - 1]
+        }
+        return parseFloat(currPrice).toFixed(2)
     }
 
     handleBuy() {
@@ -143,6 +192,7 @@ class Transactions extends React.Component {
         }
         if (choice === "Buy" && bp > Number(marketValue)) {
             if (numOfShares > 0) {
+                
                 this.props.getStock(stock).then(stock => {
                     let transaction = { portfolio_id: currentUser.portfolio.id, stock_id: stock.stock.id, purchase_price: price , shares: numOfShares }
                     this.props.createTransaction(transaction)
@@ -220,6 +270,19 @@ class Transactions extends React.Component {
         }
 
     }
+
+    handleWatchlist() {
+        let button = document.getElementById("watchlist-button")
+        let sym = this.props.match.params.symbol
+
+        if (button.innerHTML === "Add to Watchlist") {
+            addToWatchlist(sym)
+            button.innerHTML = "Remove from Watchlist"
+        } else  {
+            removeFromWatchlist(sym)
+            button.innerHTML = "Add to Watchlist"
+        }
+    }
  
     render () {
         let stockInfo = this.props.stock ? this.props.stock : {
@@ -253,8 +316,8 @@ class Transactions extends React.Component {
                             <thead>
                                 <tr>
                                     <th align="left" onClick={this.handleBuy} className="buy-option">Buy {stockInfo.symbol}</th>
-                                    <th align="left" onClick={this.handleSell} className="sell-option">Sell {stockInfo.symbol}</th>
-                                    <th align="right">...</th>
+                                    <th align="right" onClick={this.handleSell} className="sell-option">Sell {stockInfo.symbol}</th>
+                                    {/* <th align="right">...</th> */}
                                 </tr>
                             </thead>
                             
@@ -284,7 +347,7 @@ class Transactions extends React.Component {
                             <p id="buy-sell-p-tag">${this.state.buyingPower.toLocaleString(undefined, {maximumFractionDigits:2})} Buying Power Available</p>
                         </div>
                     </div>
-                    <button className="add-watchlist-button">Add to Watchlist</button>
+                    <button className="add-watchlist-button" id="watchlist-button" onClick={() => this.handleWatchlist()}></button>
                 </div>
             </div>
         )

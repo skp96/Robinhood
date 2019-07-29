@@ -14,6 +14,7 @@ const receivePortfolio = (portfolio) => {
 }
 
 const receievePortfolioStockData = (data) => {
+    debugger
     return {
         type: RECEIVE_PORTFOLIO_STOCK_DATA,
         stockData: data
@@ -45,6 +46,7 @@ export const fetchPortfolio = (portfolioId) => {
 export const fetchPortfolioStockPricesAndNews = (symbols) => {
     return (dispatch) => {
         return PortfolioApiUtil.fetchPortfolioStockPricesAndNews(symbols).then(data => {
+            debugger
             return dispatch(receievePortfolioStockData(data))
         })
     };

@@ -2,8 +2,10 @@
 #
 # Table name: portfolios
 #
-#  id      :bigint           not null, primary key
-#  user_id :integer          not null
+#  id              :bigint           not null, primary key
+#  user_id         :integer          not null
+#  buying_power    :integer          default(1000000), not null
+#  portfolio_value :integer          default(1000000), not null
 #
 
 class Portfolio < ApplicationRecord

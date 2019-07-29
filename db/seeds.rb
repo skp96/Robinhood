@@ -67,3 +67,4 @@ data_base_stocks = Stock.create([{"symbol":"A","name":"Agilent Technologies Inc.
 demoUser = User.create(fname: "Robin", lname: "Hood", email:"robinhood@robinhood.com", username: "robinhood", password: "littlehood" )
 
 Portfolio.create(user_id: demoUser.id)
+Watchlist.create(user_id: demoUser.id)

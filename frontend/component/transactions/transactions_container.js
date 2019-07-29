@@ -4,7 +4,8 @@ import Transactions from './transactions'
 import { fetchCompanyAndQuoteData, fetchStockChartData1d } from '../../actions/stock_actions'
 import {getStock} from '../../actions/stock_actions'
 import {createTransaction} from '../../actions/transaction_action'
-import {fetchPortfolio} from "../../actions/portfolio_actions"
+import {fetchPortfolio, fetchPortfolioStockPricesAndNews} from "../../actions/portfolio_actions"
+import { fetchWatchlist, addToWatchlist, removeFromWatchlist} from '../../actions/watchlist_actions'
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
         createTransaction: (transaction) => dispatch(createTransaction(transaction)),
         fetchPortfolio: (portfolioId) => dispatch(fetchPortfolio(portfolioId)),
         getStock: (stock) => dispatch(getStock(stock)),
+        fetchWatchlist: (userId) => dispatch(fetchWatchlist(userId)),
+        addToWatchlist: (symbol) => dispatch(addToWatchlist(symbol)),
+        removeFromWatchlist: (symbol) => dispatch(removeFromWatchlist(symbol))
     }
 }
 

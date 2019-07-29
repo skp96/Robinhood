@@ -7,7 +7,7 @@ class StockNews extends React.Component {
             return (
                 <li key={idx}>
                     <a href={news.url} className="stock-news-item">
-                        <img src={news.image} width="200" height="200" className="news-image" />
+                        <div className="img" style={{"backgroundImage": `url('${news.image}')`}}></div>
                         <div className="news-content">
                             <h3>{news.source}</h3>
                             <h4>{news.headline}</h4>

@@ -131,20 +131,26 @@
 
 .add-watchlist-button {
     padding: 21px 73px  21px 77px;
-    margin-left: 40px;
+    margin-left: 24px;
     border: 1px solid #21ce99;
     border-radius: 5px;
     background-color: white;
     color: #21ce99;
+    width: 85%;
+    outline: none;
 }
 
+
 .add-watchlist-button:hover {
+    cursor: pointer;
     padding: 21px 73px  21px 77px;
-    margin-left: 40px;
+    margin-left: 24px;
     border: 1px solid rgb(26, 233, 170);
     border-radius: 5px;
     background-color: white;
     color: rgb(26, 233, 170);
+    width: 85%;
+    outline: none;
 }
 
 .buy-option:hover{
@@ -183,4 +189,8 @@
 
 .oldHeight {
     height: 379px
+}
+
+#cost-proceeds {
+    font-weight: bold;
 }

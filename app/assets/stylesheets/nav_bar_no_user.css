@@ -23,9 +23,22 @@
 }
 
 
-.nav-home p {
+.nav-home {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
+}
+
+#feather {
+    margin-right: 72px;
+    font-size: 25px;
+    position: relative;
+    margin-top: 10px;
+    top: 7px;
+}
+
+#feather:hover {
+    text-decoration: underline;
+    color: #21ce99;
 }
 
 .profile a{

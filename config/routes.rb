@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     resources :portfolios, only: [:show, :update]
     resources :transactions, only: [:index, :create]
     resources :searches, only: [:show]
+    resources :watchlists, only: [:destroy, :update]
+    get '/watchlists/:user_id', to: 'watchlists#show'
   end
 end

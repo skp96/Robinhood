@@ -7,35 +7,44 @@ import NavBarContainer from '../nav/nav_container'
 class HomeUser extends React.Component {
     
     componentDidMount() {
-        const { currentUser, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData, fetchTransactions } = this.props
+        const { currentUser, fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData, fetchTransactions, fetchWatchlist} = this.props
+            let symbols = []
+        
             fetchPortfolio(currentUser.portfolio.id).then(data => {
-                let symbols = data.portfolio.currentPortfolio.map(object => {
-                    return (Object.keys(object))
-                })
-                
-                // fetchPortfolioStockPricesAndNews(symbols).then(() => {
-                //     fetchPortfolioStockChartData(symbols, "1M")
-                // })
-            })
-            fetchTransactions(currentUser.portfolio.id).then((data) => {
-                if (data.transactions["transactions"].length > 0) {
-                    let trans = document.getElementById("transactions")
-                    trans.classList.add("show-transactions")
+                for (let i = 0; i < data.portfolio.currentPortfolio.length; i++) {
+                    let object = data.portfolio.currentPortfolio[i];
+                    symbols.push(Object.keys(object).join(""))
                 }
+            }).then( () => {
+                fetchPortfolioStockChartData(symbols, "1M")
+            }).then( () => {
+                fetchWatchlist(currentUser.id).then(data => {
+                    let watchlist = data.watchlist.watchlist
+                    if (watchlist.length > 0) {
+                        for (let j = 0; j < watchlist.length; j++) {
+                            let obj = watchlist[j]
+                            symbols.push(obj["symbol"])
+                        }
+                    }
+                }).then(() => {
+                    fetchPortfolioStockPricesAndNews(symbols)
+                })
             })
     }
+
 
     portfolioValueCalc() {
         const {stockData, currentPortfolio} = this.props.portfolio
         let portfolioValue = 0
 
         let data = stockData ? stockData : []
+        
         let currPort = currentPortfolio ? currentPortfolio : []
-
-        if (data.length > 0) {
-            for (let i = 0; i < data.length; i++) {
-                let ticker = data[i]["ticker"]
-                let price = data[i]["price"]
+        let portData = data.slice(0, currPort.length)
+        if (portData.length > 0) {
+            for (let i = 0; i < portData.length; i++) {
+                let ticker = portData[i]["ticker"]
+                let price = portData[i]["price"]
                 let shares = currPort[i][ticker]
                 portfolioValue += (price * shares)
             }
@@ -59,32 +68,48 @@ class HomeUser extends React.Component {
             let remainingChartData = data.slice(1)
             let finalData = []
 
-            for (let j = 0; j < initialChartData.chartData.length; j++) {
-                let initialTicker = initialChartData.chartData[j]
-                let firstTime = initialTicker.label
+            if (remainingChartData.length === 0) {
 
-                let firstTempPV = (portfolioValue * initialTicker.change)
-                let l = 0
-                let hash = { "label": "", "portValue": 0 }
+                for (let a = 0; a < initialChartData.chartData.length; a++) {
+                    let newObj = {}
+                    let initialObj = initialChartData.chartData[a]
+                    let time = initialObj.label
+                    let value = (portfolioValue * initialObj.change)
 
-                while (l < remainingChartData.length) {
-                    
-                    for (let k = 0; k < remainingChartData[l].chartData.length; k++) {
-                        let otherticker = remainingChartData[l].chartData[k]
-                        
-                        let secondTime = otherticker.label
-                        let secondTempPv = firstTempPV
-                        
-                        if (firstTime === secondTime) {
-                            secondTempPv *=  Number(otherticker.change)
-                            hash["label"] = firstTime
-                            hash["portValue"] += Number(secondTempPv.toFixed(2))
-                        }
-                        portfolioValue = secondTempPv
-                    }
-                    l++
+                    newObj["label"] = time
+                    newObj["portValue"] = value
+
+                    finalData.push(newObj)
+
                 }
-                finalData.push(hash)
+            } else {
+                for (let j = 0; j < initialChartData.chartData.length; j++) {
+                    let initialTicker = initialChartData.chartData[j]
+                    let firstTime = initialTicker.label
+
+                    let firstTempPV = (portfolioValue * initialTicker.change)
+                    let l = 0
+                    let hash = { "label": "", "portValue": 0 }
+
+                    while (l < remainingChartData.length) {
+
+                        for (let k = 0; k < remainingChartData[l].chartData.length; k++) {
+                            let otherticker = remainingChartData[l].chartData[k]
+
+                            let secondTime = otherticker.label
+                            let secondTempPv = firstTempPV
+
+                            if (firstTime === secondTime) {
+                                secondTempPv *= Number(otherticker.change)
+                                hash["label"] = firstTime
+                                hash["portValue"] += Number(secondTempPv.toFixed(2))
+                            }
+                            portfolioValue = secondTempPv
+                        }
+                        l++
+                    }
+                    finalData.push(hash)
+                }
             }
             return finalData
         }
@@ -177,45 +202,52 @@ class HomeUser extends React.Component {
     renderStockNews() {
         const {stockData} = this.props.portfolio
         let news = stockData ? stockData : []
-        
+
         if (news.length != 0) {
             let newsData = []
 
             for (let i = 0; i < news.length; i++) {
                 let obj = news[i]
-
+                
                 if (obj.news.length === 0) {
                     continue;
                 } else {
-                    newsData.push(
-                        <li key={i}>
-                            <a href={obj.news[0].url} className="portfolio-news-item">
-                                <img src={obj.news[0].image} width="200" height="200" className="portfolio-news-image" />
-                                <div className="portfolio-news-content">
-                                    <h3>{obj.news[0].source}</h3>
-                                    <h4>{obj.news[0].headline}</h4>
-                                </div>
-                            </a>
-                        </li> 
-                    )
+                    let data= obj.news
+                    for (let i = 0; i < data.length; i++) {
+                        let currData = data[i]
+                        newsData.push(
+                            <li key={i}>
+                                <a href={currData.url} className="portfolio-news-item">
+                                    <div className="img" style={{ "backgroundImage": `url('${currData.image}')` }}></div>
+                                    <div className="portfolio-news-content">
+                                        <h3>{currData.source}</h3>
+                                        <h4>{currData.headline}</h4>
+                                    </div>
+                                </a>
+                            </li>
+                        )
+                    }
                 }
             }
+            
             return newsData
         } else {
             return news
         }
     }
 
-    renderTableBody() {
+    renderPortfolioTableBody() {
         const {currentPortfolio, stockData} = this.props.portfolio
         let stocks = currentPortfolio ? currentPortfolio : []
         let prices = stockData ? stockData : []
+        
 
-        if (prices.length != 0 && stocks.length != 0) {
+        if (prices.slice(0,stocks.length + 1).length != 0 && stocks.length != 0) {
             let finalData = []
             for (let i = 0; i < stocks.length; i++) {
                 let newObj = {}
                 let stockObj = stocks[i]
+    
                 let stockprice = prices[i].price
                 newObj["ticker"] = Object.keys(stockObj).join("")
                 newObj["price"] = stockprice
@@ -248,40 +280,60 @@ class HomeUser extends React.Component {
 
     }
 
-    renderTransactions() {
-        const {transactions} = this.props
-        let currTransactsions = transactions["transactions"] ? transactions["transactions"] : []
-        
-        let allTransactions = []
+    renderWatchlistTableBody() {
+        const { currentPortfolio, stockData } = this.props.portfolio
+        let stocks = currentPortfolio ? currentPortfolio : []
+        const {watchlist} = this.props.watchlist
+        let userWatchlist = watchlist ? watchlist : []
+        let watchlistPrices = stockData ? stockData : []
+        if (watchlistPrices.length != 0 && userWatchlist.length != 0) {
+            let finalData = []
 
-        if (currTransactsions.length <= 10) {
-            for (let i = currTransactsions.length - 1; i >= 0; i--) {
-                let obj = currTransactsions[i]
-                allTransactions.push(
-                    <div className="transactions-row">
-                        <div className="transactions-cell">{obj.symbol}</div>
-                        <div className="transactions-cell">{obj.shares}</div>
-                        <div className="transactions-cell">${obj.purchasePrice}.00</div>
+            for (let i = 0; i < userWatchlist.length; i++) {
+                let newObj = {}
+                
+                let ticker = userWatchlist[i].symbol;
+                for (let j = 0; j < watchlistPrices.length; j++) {
+                    let priceTicker = watchlistPrices[j].ticker
+                    if (ticker === priceTicker) {
+                        newObj["ticker"] = ticker
+                        newObj["price"] = watchlistPrices[i].price
+                    }
+                }
+                
+                finalData.push(newObj)
+            }
+
+            const tableBody = finalData.map((obj, idx) => {
+                return (
+                    <Link style={{ textDecoration: 'none', color: "black" }} to={`/stocks/${obj.ticker}`} className="table-row" key={idx}>
+                        <div className="table-cell">{obj.ticker}</div>
+                        <div className="table-cell-chart">{
+                            <LineChart width={45} height={16} data={[{ label: 1, portValue: 100 }, { label: 2, portValue: 98 }, { label: 3, portValue: 103 }, { label: 4, portValue: 76 }, { label: 5, portValue: 130 }]} margin={{ top: 5, right: 3, left: 0, bottom: 5 }}>
+                                <XAxis dataKey="label" hide={true} />
+                                <YAxis hide={true} domain={['dataMin', 'dataMax']} />
+                                <Line type="linear" dataKey="portValue" dot={false} stroke={this.color()} strokeWidth={2} />
+                            </LineChart>
+
+                        }</div>
+                        <div className="table-cell">${obj.price}</div>
                         <div className="break"></div>
-                    </div>
+                    </Link>
                 )
-            }
+            })
+            tableBody.unshift(
+                <div className="table-row-header">
+                    <div className="table-row-header-cell">Watchlist</div>
+                    <div className="table-row-header-cell"></div>
+                    <div className="table-row-header-cell">...</div>
+                </div>
+            )
+            return tableBody
         } else {
-            let i = 0
-            while (i < 10) {
-                let idx = currTransactsions.length - (i + 1)
-                let obj = currTransactsions[idx]
-                allTransactions.push(
-                    <div className="transactions-row">
-                        <div className="transactions-cell">{obj.symbol}</div>
-                        <div className="transactions-cell">{obj.shares}</div>
-                        <div className="transactions-cell">${obj.purchasePrice}</div>
-                    </div>
-                )
-                i++
-            }
+            return (
+                <div></div>
+            )
         }
-        return allTransactions
     }
     
     render() {
@@ -306,7 +358,7 @@ class HomeUser extends React.Component {
                                 <LineChart width={677} height={250} data={this.portfolioCalc()} margin={{ top: 5, right: 3, left: 0, bottom: 5 }}>
                                     <XAxis dataKey="label" hide={true} />
                                     <YAxis hide={true} domain={['dataMin', 'dataMax']} />
-                                    {/* <Tooltip /> */}
+                                    <Tooltip />
                                     <Line type="linear" dataKey="portValue" dot={false} stroke={this.color()} strokeWidth={2}/>
                                 </LineChart>
                             </div>
@@ -327,17 +379,6 @@ class HomeUser extends React.Component {
                                 {this.renderStockNews()}
                             </ul>
                         </div>
-                        <div className="user-transactions" id="transactions">
-                            <h1>Transactions</h1>
-                            <div className="transactions-table">
-                                <div className="transactions-row">
-                                    <div className="transactions-cell">Symbol</div>
-                                    <div className="transactions-cell">Shares</div>
-                                    <div className="transactions-cell">Purchase Price</div>
-                                </div>
-                                {this.renderTransactions()}
-                            </div>
-                        </div>
                     </div>
                     <div className="port-container">
                         <div className="portfolio-watchlist">
@@ -348,7 +389,8 @@ class HomeUser extends React.Component {
                                         <div className="table-row-header-cell"></div>
                                         <div className="table-row-header-cell">...</div>
                                     </div>
-                                    {this.renderTableBody()}
+                                    {this.renderPortfolioTableBody()}
+                                    {this.renderWatchlistTableBody()}
                                 </div>
                             </div>
                         </div>

@@ -1,3 +1,8 @@
+.recharts-wrapper {
+    z-index: -1;
+}
+
+
 .user-nav{
     display: flex;
     justify-content: space-between;
@@ -29,8 +34,7 @@
 }
 
 .fa-feather-alt{
-    font-size: 30px;
-    display: inline-block;
+    font-size: 25px;
     position: relative;
     margin-top: 10px;
     top: 5px;
@@ -75,6 +79,7 @@
     border: 1px solid #f4f4f5;
     border-radius: 5px;
     margin: 10px;
+    margin-right: 350px;
     align-items: center;
     width: 480px;
     height: 40px;
@@ -176,14 +181,18 @@
     padding: 10px 74px 0px 0px;
 }
 
+.general-items a {
+    margin-right: 24px;
+}
+
 .general-items div {
-    margin: 24px;
+    margin-right: 24px;
 }
 
 .home-link {
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 13px;
     color: black;
     font-weight: 900;
 }
@@ -201,7 +210,7 @@
     border: none;
     outline: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 13px;
     color: black;
     font-weight: 900;
 }
@@ -243,7 +252,7 @@
     border: none;
     outline: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 13px;
     color: black;
     font-weight: 900;
 }

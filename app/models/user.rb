@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
     has_one :portfolio
 
+    has_one :watchlist
+
     has_many :portfolio_joins,
         through: :portfolio,
         source: :portfolio_joins

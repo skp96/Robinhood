@@ -6,12 +6,24 @@ import TransactionsContainer from '../transactions/transactions_container'
 
 
 class Stock extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     componentDidMount() {
         const { fetchPortfolio, currentUser } = this.props
         if (!this.props.stock) {
             const symbol = this.props.match.params.symbol
-            // this.props.fetchCompanyAndQuoteData(symbol)
-            // this.props.fetchStockNews(symbol).then(fetchPortfolio(currentUser.portfolio.id))
+            this.props.fetchCompanyAndQuoteData(symbol)
+            this.props.fetchStockNews(symbol).then(fetchPortfolio(currentUser.portfolio.id))
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
+            const { fetchPortfolio, currentUser } = this.props
+                const symbol = this.props.match.params.symbol
+                this.props.fetchCompanyAndQuoteData(symbol)
+                this.props.fetchStockNews(symbol).then(fetchPortfolio(currentUser.portfolio.id))
         }
     }
 

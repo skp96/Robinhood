@@ -54,17 +54,11 @@ const receiveNews = (symbol, news) => {
     }
 }
 
-// export const saveStock = (stock) => {
-//     return (dispatch) => {
-//         return StockApiUtil.saveStock(stock).then(stock => {
-//             return dispatch(receiveStock(stock))
-//         });
-//     };
-// }
-
 export const getStock = (symbol) => {
     return (dispatch) => {
+        
         return StockApiUtil.getStock(symbol).then(stock => {
+            
             return dispatch(receiveStock(stock))
         });
     }

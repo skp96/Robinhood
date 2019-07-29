@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom'
 import * as StockApiUtil from './util/stock_api_util'
 import * as SessionApiUtil from './util/session_api_util'
 import * as TransactionApiUtil from './util/transaction_api_util'
+import * as WatchlistApiUtil from './util/watchlist_api_util'
 import Root from './component/root'
 import configureStore from './store/store'
 
 import { fetchStockChartData, fetchStockChartData1d, fetchCompanyAndQuoteData, fetchStocks, getStock, saveStock, getAllStocks  } from './actions/stock_actions'
 import { fetchPortfolio, fetchPortfolioStockPricesAndNews, fetchPortfolioStockChartData} from './actions/portfolio_actions'
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -35,6 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.fetchStockChartData1d = StockApiUtil.fetchStockChartData1d("FB")
     // window.fetchStockNews = StockApiUtil.fetchStockNews("apple")
     // window.getAllStocks = StockApiUtil.getAllStocks()
+
+    // window.fetchWatchlist = WatchlistApiUtil.fetchWatchlist(10)
+    // window.addToWatchlist = WatchlistApiUtil.addToWatchlist("FB")
+    // window.removeFromWatchlist = WatchlistApiUtil.removeFromWatchlist("FB")
 
     // window.createTransaction = TransactionApiUtil.createTransaction({portfolio_id: 1, stock_id: 2, purchase_price: 20, shares: 9})
 

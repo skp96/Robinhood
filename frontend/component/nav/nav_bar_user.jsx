@@ -7,24 +7,37 @@ class NavBarUser extends React.Component {
         super(props)
         this.state = {
             searchInput: "",
-            matches: []
+            matches: [],
+            zIndexSet: false,
         }
         this.update = this.update.bind(this)
+        this.handleChart = this.handleChart.bind(this)
+        this.resetZindex = this.resetZindex.bind(this)
     }
 
     componentDidMount() {
         document.getElementById("root").addEventListener("click", this.removeAccount);
+        document.getElementById("root").addEventListener("click", this.resetZindex);
+        this.setChartStyling()
     }
 
     componentWillUnmount() {
-        document.getElementById("root").removeEventListener("click", this.removeErrors)
+        document.getElementById("root").removeEventListener("click", this.removeAccount);
+        document.getElementById("root").removeEventListener("click", this.resetZindex);
+    }
+
+    setChartStyling() {
+        let chart = document.getElementsByClassName("recharts-wrapper")[0]
+        if (chart !== undefined) {
+            chart.style.zIndex = "1"
+        }
+        
     }
 
     update(field) {
         return (e) => {
             let input = e.target.value
             this.setState({ [field]: input })
-            
             const {searchStocks} = this.props
             if (input != "") {
                 searchStocks(input).then(stocks => {
@@ -45,6 +58,20 @@ class NavBarUser extends React.Component {
     removeAccount() {
         let account = document.getElementById("account")
         account.classList.remove("change-to-visible")
+    }
+
+    handleChart() {
+        let chart = document.getElementsByClassName("recharts-wrapper")[0]
+        chart.style.zIndex = "-1"
+        this.setState({ ["zIndexSet"]: true});
+
+    }
+
+    resetZindex() {
+        if (this.state.zIndexSet === true) {
+            let chart = document.getElementsByClassName("recharts-wrapper")[0]
+            chart.style.zIndex = "1"
+        }
     }
 
     render () {
@@ -79,7 +106,7 @@ class NavBarUser extends React.Component {
                 <div className="search-bar-container">
                     <form className="search-bar-form">
                         <i className="fas fa-search"></i>
-                        <input type="text" onChange={this.update("searchInput")} value={this.state.searchInput} name="search"  placeholder="Search" className="search-input" />
+                        <input type="text" onChange={this.update("searchInput")} onClick={() => this.handleChart()} value={this.state.searchInput} name="search"  placeholder="Search" className="search-input" id="search-box" />
                     </form>
                     <div className="search-results">
                         {searchResults}
@@ -102,15 +129,12 @@ class NavBarUser extends React.Component {
                             <li>Buying Power</li>
                             <li></li>
                             <li onClick={() => this.props.logout()}>
-                                <i class="fas fa-sign-out-alt"></i>
+                                <i className="fas fa-sign-out-alt"></i>
                                 <span>Log Out</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                {/* <div className="user-nav-links">
-                    <div onClick={() => this.props.logout()}>Logout</div>
-                </div> */}
             </nav>
         )
     }

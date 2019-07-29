@@ -15,7 +15,7 @@ const portfoliosReducer = (oldState = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_PORTFOLIO:
-            return merge(newState, action.portfolio)
+            return action.portfolio
         
         case RECEIVE_TRANSACTION: 
             let portfolio = newState["currentPortfolio"]
@@ -33,6 +33,7 @@ const portfoliosReducer = (oldState = {}, action) => {
             let tickers = Object.keys(action.stockData)
 
             newState["stockData"] = []
+            debugger
             tickers.forEach(el => {
                return newState["stockData"].push({["ticker"]: el, ["price"]: action.stockData[el].quote.latestPrice, ["news"]: action.stockData[el].news })
             });

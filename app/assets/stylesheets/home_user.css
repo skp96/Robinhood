@@ -3,9 +3,9 @@
     justify-content: space-between;
 }
 
-.recharts-wrapper {
+/* .recharts-wrapper {
     z-index: -1;
-}
+} */
 
 .portfolio-main {
     display: flex;
@@ -136,7 +136,7 @@
     margin: 24px; 
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
     width: 275px;
-    height: 379px;
+    height: 530px;
     overflow: auto;
 }
 
@@ -149,18 +149,19 @@
 .table-row-header-cell {
     flex-grow: 1;
     width: 1px;
-    margin: 24px;
+    margin: 20px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .table-row {
     display: flex;
     flex-wrap: wrap;
+    
 }
 
-.table-row:hover {
-    background-color: whitesmoke;
+.table-row:hover .table-cell {
+    color: #21ce99;
 }
 
 .break {
@@ -174,7 +175,7 @@
     width: 1px;
     margin: 24px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 13px;
 }
 
 .table-cell-chart {

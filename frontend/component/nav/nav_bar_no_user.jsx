@@ -6,7 +6,7 @@ const NavBarNoUser = () => {
         <nav className="login-signup">
             <div className="profile">
                 <Link className="nav-home" to="/">
-                    <i class="fas fa-feather-alt">littlehood</i>
+                    <i class="fas fa-feather-alt" id="feather">littlehood</i>
                 </Link>
                 <a href="https://github.com/skp96" className="github">Github</a>
                 <a href="https://www.linkedin.com/in/sunny-patel-b0729858/" className="linkedin">LinkedIn</a>

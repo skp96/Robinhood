@@ -56,14 +56,17 @@ class NavBarUser extends React.Component {
     }
 
     handleClassChange() {
-
+        
         let transactionWatchlist = document.getElementById("trans-watch")
-        transactionWatchlist.style.zIndex = "-1"
-        this.setState({ ["setTrans"]: true })
+        debugger
+        if (transactionWatchlist !== null) {
+
+            transactionWatchlist.style.zIndex = "-1"
+            this.setState({ ["setTrans"]: true })
+        }
 
         let account = document.getElementById("account")
         account.classList.add("change-to-visible")
-        
     }
 
     removeAccount() {

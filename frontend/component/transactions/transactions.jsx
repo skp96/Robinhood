@@ -41,9 +41,11 @@ class Transactions extends React.Component {
         const { fetchCompanyAndQuoteData, fetchPortfolio, fetchStockChartData1d, currentUser, fetchWatchlist} = this.props
         if (!this.props.stock) {
             const symbol = this.props.match.params.symbol
-            fetchCompanyAndQuoteData(symbol).then(fetchStockChartData1d(symbol)).then(fetchPortfolio(currentUser.portfolio.id))
+            fetchCompanyAndQuoteData(symbol).then(fetchStockChartData1d(symbol))
+            fetchPortfolio(currentUser.portfolio.id)
         }
         document.getElementById("root").addEventListener("click", this.removeErrors);
+        document.getElementById
 
         fetchWatchlist(currentUser.id).then(data => {
             
@@ -310,7 +312,7 @@ class Transactions extends React.Component {
         let marketPrice = this.calculateCurrPrice()
         return (
             <div className="transaction-container">
-                <div className="transaction-watchlist">
+                <div className="transaction-watchlist" id="trans-watch">
                     <div className="transaction" id="transaction">
                         <table className="transaction-table">
                             <thead>

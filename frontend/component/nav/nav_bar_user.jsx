@@ -9,21 +9,26 @@ class NavBarUser extends React.Component {
             searchInput: "",
             matches: [],
             zIndexSet: false,
+            setTrans: false,
         }
         this.update = this.update.bind(this)
         this.handleChart = this.handleChart.bind(this)
         this.resetZindex = this.resetZindex.bind(this)
+        this.handleTransactionContainer = this.handleTransactionContainer.bind(this)
+        this.resetTransWatchlist = this.resetTransWatchlist.bind(this)
     }
 
     componentDidMount() {
         document.getElementById("root").addEventListener("click", this.removeAccount);
         document.getElementById("root").addEventListener("click", this.resetZindex);
+        document.getElementById("root").addEventListener("click", this.resetTransWatchlist);
         this.setChartStyling()
     }
 
     componentWillUnmount() {
         document.getElementById("root").removeEventListener("click", this.removeAccount);
         document.getElementById("root").removeEventListener("click", this.resetZindex);
+        document.getElementById("root").removeEventListener("click", this.resetTransWatchlist);
     }
 
     setChartStyling() {
@@ -51,8 +56,14 @@ class NavBarUser extends React.Component {
     }
 
     handleClassChange() {
+
+        let transactionWatchlist = document.getElementById("trans-watch")
+        transactionWatchlist.style.zIndex = "-1"
+        this.setState({ ["setTrans"]: true })
+
         let account = document.getElementById("account")
         account.classList.add("change-to-visible")
+        
     }
 
     removeAccount() {
@@ -73,6 +84,21 @@ class NavBarUser extends React.Component {
             chart.style.zIndex = "1"
         }
     }
+
+    handleTransactionContainer() {
+        let transactionWatchlist = document.getElementById("trans-watch")
+        transactionWatchlist.style.zIndex = "-1"
+        this.setState({ ["setTrans"]: true})
+    }
+
+    resetTransWatchlist() {
+        if (this.state.setTrans === true) {
+            let transactionWatchlist = document.getElementById("trans-watch")
+            transactionWatchlist.style.zIndex = "1"
+        }
+    }
+
+
 
     render () {
         const {currentUser} = this.props
@@ -115,7 +141,7 @@ class NavBarUser extends React.Component {
                 <div className="general-items">
                     <Link className="home-link" to="/">Home</Link>
                     <div className="home-notification">
-                        <button>Notification</button>
+                        <button onClick={() => this.handleTransactionContainer()}>Notification</button>
                         <ul className="notfication-contents">
                             <li>Funds Available</li>
                             <li>${buying_power.toLocaleString(undefined, { maximumFractionDigits: 2 })} is now available for trading</li>

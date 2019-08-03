@@ -37,6 +37,7 @@ const receiveSearchedStocks = (stocks) => {
 export const fetchPortfolio = (portfolioId) => {
     return (dispatch) => {
         return PortfolioApiUtil.fetchPortfolio(portfolioId).then(portfolio => {
+            
             return dispatch(receivePortfolio(portfolio))
         })
     };

@@ -25,7 +25,6 @@ class Portfolio < ApplicationRecord
     has_many :transactions
 
     def current_stocks
-        
         shares = self.portfolio_joins
         
         stocks = self.stocks

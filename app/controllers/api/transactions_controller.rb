@@ -2,11 +2,11 @@ class Api::TransactionsController < ApplicationController
 
     def create 
         @transaction = Transaction.new(transaction_params)
-    
+        
         if @transaction.save
             @transactions = Transaction.where(params[:portfolio_id])
-            @portfolio_join = PortfolioJoin.find_by(stocks_id: @transaction.stock_id)
-    
+            @portfolio_join = PortfolioJoin.find_by(portfolios_id: params[:portfolio_id], stocks_id: @transaction.stock_id)
+            
             if @portfolio_join
                 if @portfolio_join.shares + @transaction.shares == 0        
                     @portfolio_join.destroy

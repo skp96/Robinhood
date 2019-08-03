@@ -66,6 +66,7 @@ class LoginForm extends React.Component {
 
                         
                         <button className="login-button" type="submit" value={this.props.formType}>Sign In</button>
+                        <button className="login-button" type="submit" onClick={() => this.props.login({ username: "robinhood", password: "littlehood" })}>Demo Login</button>
 
                     </form>
                 </div>

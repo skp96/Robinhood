@@ -174,7 +174,7 @@ class SignupForm extends React.Component {
                         <button className="signup-button" type="submit" value={this.props.formType}>Sign Up</button>
 
                         <div className="existing-member">
-                            <Link className="signin-link" to="/login">Already a member, sign in here!</Link>
+                            <p className="signin-link" onClick={() => this.props.login({ username: "robinhood", password: "littlehood" })}>Don't want to signup? Try the Demo!</p>
                         </div>
                     </div>
                 </form>

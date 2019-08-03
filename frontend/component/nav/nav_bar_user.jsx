@@ -58,7 +58,6 @@ class NavBarUser extends React.Component {
     handleClassChange() {
         
         let transactionWatchlist = document.getElementById("trans-watch")
-        debugger
         if (transactionWatchlist !== null) {
 
             transactionWatchlist.style.zIndex = "-1"

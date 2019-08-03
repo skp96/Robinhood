@@ -11,6 +11,10 @@ class HomeUser extends React.Component {
             let symbols = []
         
             fetchPortfolio(currentUser.portfolio.id).then(data => {
+                if (data.portfolio.currentPortfolio.length === 0) {
+                    
+                    alert("Don't own any stocks yet? Please use the search bar to navigate to the stocks page to purchase a security.")
+                }
                 for (let i = 0; i < data.portfolio.currentPortfolio.length; i++) {
                     let object = data.portfolio.currentPortfolio[i];
                     symbols.push(Object.keys(object).join(""))
@@ -297,7 +301,7 @@ class HomeUser extends React.Component {
                     let priceTicker = watchlistPrices[j].ticker
                     if (ticker === priceTicker) {
                         newObj["ticker"] = ticker
-                        newObj["price"] = watchlistPrices[i].price
+                        newObj["price"] = watchlistPrices[j].price
                     }
                 }
                 

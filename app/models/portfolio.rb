@@ -31,7 +31,7 @@ class Portfolio < ApplicationRecord
 
         
         curr_stocks = []
-
+        
         shares.each do |share|
             hash = {}
             stocks.each do |stock|

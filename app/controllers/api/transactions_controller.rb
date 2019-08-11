@@ -5,9 +5,10 @@ class Api::TransactionsController < ApplicationController
         
         if @transaction.save
             @transactions = Transaction.where(params[:portfolio_id])
-            @portfolio_join = PortfolioJoin.find_by(portfolios_id: params[:portfolio_id], stocks_id: @transaction.stock_id)
-            
+            @portfolio_join = PortfolioJoin.find_by(portfolios_id: @transaction.portfolio_id, stocks_id: @transaction.stock_id)
+    
             if @portfolio_join
+            
                 if @portfolio_join.shares + @transaction.shares == 0        
                     @portfolio_join.destroy
                 
@@ -17,7 +18,6 @@ class Api::TransactionsController < ApplicationController
             else
                 @portfolio_join = PortfolioJoin.create(portfolios_id: @transaction.portfolio_id, stocks_id: @transaction.stock_id, shares: @transaction.shares)
             end
-            
             value = (@transaction.shares * @transaction.purchase_price) * -1
             @portfolio = current_user.portfolio
             new_buying_power = @portfolio.buying_power + value

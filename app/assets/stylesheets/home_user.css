@@ -160,8 +160,8 @@
     
 }
 
-.table-row:hover .table-cell {
-    color: #21ce99;
+.table-row:hover{
+    background-color: whitesmoke;
 }
 
 .break {

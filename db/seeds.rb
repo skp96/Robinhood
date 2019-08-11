@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PortfolioJoin.destroy_all
+WatchlistJoin.destroy_all
 User.destroy_all
 Stock.destroy_all
 Portfolio.destroy_all

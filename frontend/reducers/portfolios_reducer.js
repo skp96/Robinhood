@@ -19,7 +19,7 @@ const portfoliosReducer = (oldState = {}, action) => {
         
         case RECEIVE_TRANSACTION: 
             let portfolio = newState["currentPortfolio"]
-
+        
             for (let i = 0; i < portfolio.length; i++) {
                 if (portfolio[i][action.transaction.symbol] != undefined) {
                     portfolio[i][action.transaction.symbol] += action.transaction.shares

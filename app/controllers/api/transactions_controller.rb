@@ -41,13 +41,3 @@ class Api::TransactionsController < ApplicationController
     end
 
 end
-
-# add create/update/destroy logic for PortfoloJoins in transactions controller when
-# creating a transaction. Conditional start with destroy (check of :shares from params
-# matches @portfolio_join.shares), next update (@portfolio_join.shares + params[:shares])
-# lastly PortfolioJoin.create(:portfolios_id: @transaction.portfolid_id, etc..)
-# then need to update jbuilder --> array format but include json.transaction do and
-# json.portfolioJoin do --> goal is to have an array with objects, where each object
-# has two keys, one transaction and one portfolio join 
-
-# once completed and tested --> test transaction ajax request, delete, portfolio_joins controller, routes, and view
